@@ -108,3 +108,6 @@ def main(stdscr):
     win.addstr(sh // 2 - 1, sw // 2 - 10, "Game Over", curses.A_BOLD)
     win.addstr(sh // 2, sw // 2 - 10, f"Final Score: {score}", curses.A_BOLD)
     win.refresh()
+
+    # Wait for a key press
+    win.getch()
