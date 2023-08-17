@@ -54,3 +54,36 @@ def main(stdscr):
         if time_remaining <= 0:
             lives = 0  # User loses when the timer runs out
             break
+        # Handle user input and snake movement
+        event = win.getch()
+        if event != -1:
+            # Process user input to change snake direction
+            if event == curses.KEY_DOWN and prev_key != curses.KEY_UP:
+                key = curses.KEY_DOWN
+            if event == curses.KEY_UP and prev_key != curses.KEY_DOWN:
+                key = curses.KEY_UP
+            if event == curses.KEY_LEFT and prev_key != curses.KEY_RIGHT:
+                key = curses.KEY_LEFT
+            if event == curses.KEY_RIGHT and prev_key != curses.KEY_LEFT:
+                key = curses.KEY_RIGHT
+
+        prev_key = key
+
+        y, x = snake[0]
+
+        if key == curses.KEY_DOWN and prev_key != curses.KEY_UP:
+            y += 1
+        if key == curses.KEY_UP and prev_key != curses.KEY_DOWN:
+            y -= 1
+        if key == curses.KEY_LEFT and prev_key != curses.KEY_RIGHT:
+            x -= 1
+        if key == curses.KEY_RIGHT and prev_key != curses.KEY_LEFT:
+            x += 1
+
+        if y == 0 or y == sh or x == 0 or x == sw:
+            lives -= 1
+            if lives == 0:
+                break
+            else:
+                time.sleep(1)
+                continue
