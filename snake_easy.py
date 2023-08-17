@@ -125,3 +125,8 @@ def main(stdscr):
     win.addstr(sh // 2, sw // 2 - 6, "Yes", curses.A_BOLD)
     win.addstr(sh // 2, sw // 2 + 1, "No", curses.A_BOLD)
     win.refresh()
+    # Get user input for saving score
+    save_choice = None
+    while save_choice not in [ord("y"), ord("n")]:
+        win.refresh()  # Refresh the screen to display the prompt
+        save_choice = win.getch()
