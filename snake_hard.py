@@ -87,3 +87,25 @@ def main(stdscr):
             else:
                 time.sleep(1)
                 continue
+
+        if (y, x) in snake[1:]:
+            lives -= 1
+            if lives == 0:
+                break
+            else:
+                hit_index = snake.index((y, x))
+                snake = snake[
+                    : hit_index + 1
+                ]  # Keep only the collided part of the snake
+                snake[0] = (y, x)  # Update the head position
+                time.sleep(1)
+                continue
+        if (y, x) in obstacles:
+            lives -= 1
+            if lives == 0:
+                break
+            else:
+                time.sleep(1)
+                continue
+
+        snake.insert(0, (y, x))
