@@ -150,3 +150,10 @@ class GameMenu:
         """
         curses.wrapper(self.start_snake_game(snake_easy_main))
         self.show_levels_menu()  # Go back to level selection after the game
+
+    def start_medium_level(self):
+        """
+        start_medium_level method starts the snake game for the medium leve
+        """
+        curses.wrapper(self.start_snake_game(snake_medium_main))
+        self.show_levels_menu()  # Go back to level selection after the game
