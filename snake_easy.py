@@ -30,3 +30,44 @@ def main(stdscr):
 
     score = 0
     lives = 3
+
+    while key != ESC and lives > 0:
+        # Display the score and lives on the screen
+        win.addnstr(0, 2, "Score: " + str(score) + " ", 20)
+        win.addnstr(0, sw - 10, "Lives: " + str(lives) + " ", 20)
+        win.timeout(150 - (len(snake)) // 5 + len(snake) // 10 % 120)
+        event = win.getch()
+
+        # Handle user input to change the snake's direction
+        if event != -1:
+            if event == curses.KEY_DOWN and prev_key != curses.KEY_UP:
+                key = curses.KEY_DOWN
+            if event == curses.KEY_UP and prev_key != curses.KEY_DOWN:
+                key = curses.KEY_UP
+            if event == curses.KEY_LEFT and prev_key != curses.KEY_RIGHT:
+                key = curses.KEY_LEFT
+            if event == curses.KEY_RIGHT and prev_key != curses.KEY_LEFT:
+                key = curses.KEY_RIGHT
+
+        prev_key = key
+
+        # Update snake's position based on key input
+        y, x = snake[0]
+        if key == curses.KEY_DOWN and prev_key != curses.KEY_UP:
+            y += 1
+        if key == curses.KEY_UP and prev_key != curses.KEY_DOWN:
+            y -= 1
+        if key == curses.KEY_LEFT and prev_key != curses.KEY_RIGHT:
+            x -= 1
+        if key == curses.KEY_RIGHT and prev_key != curses.KEY_LEFT:
+            x += 1
+
+        # Teleport the snake to the opposite edge if it goes out of bounds
+        if y == 0:
+            y = sh - 1
+        elif y == sh:
+            y = 1
+        if x == 0:
+            x = sw - 1
+        elif x == sw:
+            x = 1
