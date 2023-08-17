@@ -130,3 +130,9 @@ def main(stdscr):
     while save_choice not in [ord("y"), ord("n")]:
         win.refresh()  # Refresh the screen to display the prompt
         save_choice = win.getch()
+
+    SCOPE = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive.file",
+        "https://www.googleapis.com/auth/drive",
+    ]
