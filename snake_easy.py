@@ -156,3 +156,25 @@ def main(stdscr):
                 win.addstr(name_row, name_col, name, curses.A_NORMAL)
         # Refresh the screen once after the name has been entered
         win.refresh()
+
+        # Assign the name to current_user_name
+        current_user_name = name
+    # Clear the window again before displaying the top scorers list
+    win.clear()
+
+    # Fetch and sort the top scorers regardless of saving choice
+    try:
+        CREDS = Credentials.from_service_account_file("creds.json")
+        SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+        GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+        SHEET = GSPREAD_CLIENT.open("slithering_challenge")
+        easy = SHEET.worksheet("easy")
+        easy.append_row([name, score])
+        top_scorers = easy.get_all_values()[1:]
+        sorted_top_scorers = sorted(top_scorers, key=lambda x: int(x[1]), reverse=True)
+    except Exception as e:
+        # Handle any errors that might occur during the API call
+        win.addstr(sh // 2, sw // 2 - 15, "Error fetching top scorers.", curses.A_BOLD)
+        win.addstr(sh // 2 + 1, sw // 2 - 15, str(e))
+        win.refresh()
+    # Display the top 10 scorers list
