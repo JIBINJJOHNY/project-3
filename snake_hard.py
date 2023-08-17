@@ -124,3 +124,9 @@ def main(stdscr):
             win.addch(obstacle[0], obstacle[1], "X")
 
         win.addch(snake[0][0], snake[0][1], "#")
+        win.addch(snake[0][0], snake[0][1], "#")
+        # Calculate the timeout value for controlling snake speed
+        # Increase this value to slow down the snake
+        timeout_value = 100 - (len(snake)) // 5 + len(snake) // 30 % 160
+        # Set the timeout value
+        win.timeout(timeout_value)
