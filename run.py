@@ -74,5 +74,17 @@ class GameMenu:
         level_menu_entry_index = self.menu.show()
         return level_menu_entry_index
 
+    def show_leaderboard(self):
+        """
+        show_leaderboard method displays the chosen leaderboard or goes back to the main menu.
+        """
+        level_menu = TerminalMenu(["Easy", "Medium", "Hard", "Back"])
+        level_menu_entry_index = level_menu.show()
 
-gi
+        if level_menu_entry_index in [0, 1, 2]:
+            level_names = ["easy", "medium", "hard"]
+            level_name = level_names[level_menu_entry_index]
+            self.display_leaderboard(level_name)
+
+        elif level_menu_entry_index == 3:
+            self.show_menu()  # Go back to main menu
