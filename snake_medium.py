@@ -179,3 +179,38 @@ def main(stdscr):
         win.addstr(sh // 2, sw // 2 - 15, "Error fetching top scorers.", curses.A_BOLD)
         win.addstr(sh // 2 + 1, sw // 2 - 15, str(e))
         win.refresh()
+
+    # Display the top 10 scorers list
+    try:
+        win.clear()  # Clear the window before displaying the top scorers list
+        win.addstr(sh // 2 - 5, sw // 2 - 15, "Top 10 Scorers", curses.A_BOLD)
+        # Variable to track if the current user's entry is highlighted
+        current_user_highlighted = False
+        for i, (name, s) in enumerate(sorted_top_scorers[:10], start=1):
+            position_str = f"{i}. {name}: {s}"
+            if name == current_user_name and int(s) == score:
+                # Highlight the current user's entry
+                win.addstr(
+                    sh // 2 - 5 + i, sw // 2 - 15, position_str, curses.A_STANDOUT
+                )
+                current_user_highlighted = True
+            else:
+                win.addstr(sh // 2 - 5 + i, sw // 2 - 15, position_str)
+        if not current_user_highlighted and len(sorted_top_scorers) < 10:
+            i += 1
+            # If the current user's entry wasn't highlighted earlier, highlight it now
+            position_str = f"{i}. {current_user_name}: {score}"
+            win.addstr(sh // 2 - 5 + i, sw // 2 - 15, position_str, curses.A_STANDOUT)
+        win.refresh()
+        win.getch()
+        # Add a delay to allow the user more time to view the content
+        sleep(10)
+    except Exception as e:
+        # Handle any errors that might occur during the API call
+        win.clear()
+        win.addstr(sh // 2, sw // 2 - 15, "Error fetching top scorers.", curses.A_BOLD)
+        win.addstr(sh // 2 + 1, sw // 2 - 15, str(e))
+        win.refresh()
+
+
+curses.wrapper(main)
