@@ -143,3 +143,10 @@ class GameMenu:
 
             elif self.current_state == 3:
                 break  # Quit the game
+
+    def start_easy_level(self):
+        """
+        start_easy_level method starts the snake game for the easy level
+        """
+        curses.wrapper(self.start_snake_game(snake_easy_main))
+        self.show_levels_menu()  # Go back to level selection after the game
