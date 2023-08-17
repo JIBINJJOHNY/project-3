@@ -71,3 +71,13 @@ def main(stdscr):
             x = sw - 1
         elif x == sw:
             x = 1
+
+        if (y, x) in snake[1:]:
+            # Snake collided with itself
+            lives -= 1
+            if lives == 0:
+                break
+            else:
+                # Pause briefly before continuing
+                sleep(1)
+                continue
