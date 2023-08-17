@@ -76,3 +76,12 @@ def main(stdscr):
             else:
                 sleep(1)
                 continue
+        if (y, x) in obstacles:
+            lives -= 1
+            if lives == 0:
+                break
+            else:
+                sleep(1)
+                continue
+
+        snake.insert(0, (y, x))
