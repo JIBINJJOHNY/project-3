@@ -130,3 +130,25 @@ def main(stdscr):
         timeout_value = 100 - (len(snake)) // 5 + len(snake) // 30 % 160
         # Set the timeout value
         win.timeout(timeout_value)
+    # Clear the window before displaying the game over message
+    win.clear()
+    win.addstr(sh // 2 - 1, sw // 2 - 10, "Game Over", curses.A_BOLD)
+    win.addstr(sh // 2, sw // 2 - 10, f"Final Score: {score}", curses.A_BOLD)
+    win.refresh()
+
+    # Wait for a key press
+    win.getch()
+
+    # Add a delay here before displaying the save score prompt
+    time.sleep(3)  # Change the delay time according to your preference
+
+    # Clear the window again before displaying the prompt
+    win.clear()
+
+    # Display the save score prompt and options
+    win.addstr(
+        sh // 2 - 2, sw // 2 - 15, "Do you want to save your score?", curses.A_BOLD
+    )
+    win.addstr(sh // 2, sw // 2 - 6, "Yes", curses.A_BOLD)
+    win.addstr(sh // 2, sw // 2 + 1, "No", curses.A_BOLD)
+    win.refresh()
