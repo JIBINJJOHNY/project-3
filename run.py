@@ -38,3 +38,20 @@ class GameMenu:
         sub_menu = TerminalMenu(sub_options)  # Create a submenu
         sub_menu_entry_index = sub_menu.show()  # Display the submenu
         self.current_state = sub_menu_entry_index
+
+    def show_instructions(self):
+        """
+        show_instructions method displays the game instructions and provides options to return to the main menu.
+        """
+        instructions = [
+            "Welcome to Snake Game!",
+            "Use the arrow keys to control the snake's movement.",
+            "Collect the red food to increase your score.",
+            "Be careful not to run into the walls or your own body!",
+            "You have three lives. Losing all lives will end the game.",
+            "Press 'Esc' to pause the game at any time.",
+            "After the game is over, you can choose to save your score.",
+            "Press 'Yes' to save your score and see the leaderboard.",
+            "Press 'No' to return to the level selection screen.",
+            "Press '0' to go back to the main menu.",
+        ]
