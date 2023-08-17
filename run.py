@@ -58,3 +58,10 @@ class GameMenu:
             "Press 'No' to return to the level selection screen.",
             "Press '0' to go back to the main menu.",
         ]
+
+        print("\n".join(instructions))
+        while True:
+            user_input = input("Enter 0 Return to main menu: ")
+            if user_input == "0":
+                self.show_menu()
+                break
