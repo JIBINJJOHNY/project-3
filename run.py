@@ -88,3 +88,28 @@ class GameMenu:
 
         elif level_menu_entry_index == 3:
             self.show_menu()  # Go back to main menu
+
+    def display_leaderboard(self, level_name):
+        """
+        display_leaderboard method fetches and displays the leaderboard data for a specific level.
+        """
+        try:
+            level_worksheet = self.SHEET.worksheet(level_name)
+            level_data = level_worksheet.get_all_values()
+
+            # Skip the header row and sort the level data by score in descending order
+            sorted_level_data = sorted(
+                (
+                    entry for entry in level_data[1:] if entry[1]
+                ),  # Filter out entries with empty scores
+                key=lambda x: int(x[1]),  # Convert to integer for sorting
+                reverse=True,
+            )
+
+            print(f"Displaying {level_name.capitalize()} level leaderboard:")
+            for rank, entry in enumerate(sorted_level_data, start=1):
+                name, score = entry
+                print(f"{rank}. {name}: {score}")
+
+        except Exception as e:
+            print("Error fetching or displaying leaderboard data:", str(e))
