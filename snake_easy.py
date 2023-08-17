@@ -81,3 +81,27 @@ def main(stdscr):
                 # Pause briefly before continuing
                 sleep(1)
                 continue
+        # Move the snake forward
+        snake.insert(0, (y, x))
+        # Generate new food if none exists
+        if not food:
+            while True:
+                food = (
+                    randint(1, sh - 1),
+                    randint(1, sw - 1),
+                )
+                if food not in snake:
+                    break
+            win.addch(food[0], food[1], "*")  # Display the food
+        # Check if snake has eaten the food
+        elif snake[0] == food:
+            score += 1
+            food = ()  # Clear the food position
+        else:
+            last = snake.pop()
+            win.addch(last[0], last[1], " ")  # Clear the tail position
+
+        win.addch(snake[0][0], snake[0][1], "#")  # Display the snake's head
+
+    # Clear the window before displaying the game over message
+    win.clear()
