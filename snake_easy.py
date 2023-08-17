@@ -142,3 +142,17 @@ def main(stdscr):
         win.clear()
         win.addstr(sh // 2, sw // 2 - 15, "Enter your name:", curses.A_BOLD)
         win.refresh()
+
+        # Get the user's name input
+        name = ""
+        name_row = sh // 2 + 1  # Calculate the row for displaying the name
+        name_col = sw // 2 - 15  # Calculate the column for displaying the name
+        while True:
+            char = win.getch()
+            if char == 10:  # Enter key
+                break
+            elif 32 <= char <= 126:  # ASCII printable characters
+                name += chr(char)
+                win.addstr(name_row, name_col, name, curses.A_NORMAL)
+        # Refresh the screen once after the name has been entered
+        win.refresh()
