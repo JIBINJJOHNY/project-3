@@ -111,3 +111,5 @@ def main(stdscr):
 
     # Wait for a key press
     win.getch()
+    # Add a delay before displaying the save score prompt
+    sleep(3)
