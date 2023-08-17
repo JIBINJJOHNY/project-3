@@ -85,7 +85,7 @@ def main(stdscr):
             if lives == 0:
                 break
             else:
-                time.sleep(1)
+                sleep(1)
                 continue
 
         if (y, x) in snake[1:]:
@@ -93,14 +93,14 @@ def main(stdscr):
             if lives == 0:
                 break
             else:
-                time.sleep(1)
+                sleep(1)
                 continue
         if (y, x) in obstacles:
             lives -= 1
             if lives == 0:
                 break
             else:
-                time.sleep(1)
+                sleep(1)
                 continue
 
         snake.insert(0, (y, x))
@@ -140,7 +140,7 @@ def main(stdscr):
     win.getch()
 
     # Add a delay here before displaying the save score prompt
-    time.sleep(3)  # Change the delay time according to your preference
+    sleep(3)  # Change the delay time according to your preference
 
     # Clear the window again before displaying the prompt
     win.clear()
@@ -226,7 +226,7 @@ def main(stdscr):
         win.refresh()
         win.getch()
         # Add a delay to allow the user more time to view the content
-        time.sleep(10)
+        sleep(10)
     except Exception as e:
         # Handle any errors that might occur during the API call
         win.clear()

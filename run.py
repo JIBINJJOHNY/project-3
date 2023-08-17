@@ -2,6 +2,9 @@ import curses
 from simple_term_menu import TerminalMenu
 import gspread
 from google.oauth2.service_account import Credentials
+from snake_easy import main as snake_easy_main
+from snake_medium import main as snake_medium_main
+from snake_hard import main as snake_hard_main
 
 
 class GameMenu:

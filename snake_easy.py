@@ -211,4 +211,5 @@ def main(stdscr):
         win.refresh()
 
 
+# Function is used to safely run the main function, setting up and cleaning up the terminal environment correctly.
 curses.wrapper(main)
