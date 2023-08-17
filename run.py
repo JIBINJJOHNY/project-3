@@ -178,3 +178,15 @@ class GameMenu:
         """
         self.show_menu()
         self.start_game()
+
+
+def main():
+    """
+    The main function creates an instance of GameMenu and starts the game menu.
+    """
+    game_menu = GameMenu()
+    game_menu.start()
+
+
+if __name__ == "__main__":
+    main()
