@@ -28,3 +28,13 @@ class GameMenu:
         print("Welcome to Slithering Challenge\n")  # Heading
         menu_entry_index = self.menu.show()
         self.current_state = menu_entry_index
+
+    def show_levels_menu(self):
+        """
+        show_levels_menu method displays a submenu for selecting game levels and updates current_state
+        """
+        heading = "Levels"
+        sub_options = ["Easy", "Medium", "Hard", "Back"]
+        sub_menu = TerminalMenu(sub_options)  # Create a submenu
+        sub_menu_entry_index = sub_menu.show()  # Display the submenu
+        self.current_state = sub_menu_entry_index
