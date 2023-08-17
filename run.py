@@ -65,3 +65,14 @@ class GameMenu:
             if user_input == "0":
                 self.show_menu()
                 break
+
+    def choose_leaderboard_level(self):
+        """
+        choose_leaderboard_level method prompts the user to choose a leaderboard level.
+        """
+        print("Which level's leaderboard do you want to see?")
+        level_menu_entry_index = self.menu.show()
+        return level_menu_entry_index
+
+
+gi
