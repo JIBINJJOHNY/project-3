@@ -1,6 +1,6 @@
 import curses
 from random import randint
-from time import sleep
+from time import sleep, time
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -36,5 +36,21 @@ def main(stdscr):
 
     score = 0
     lives = 3
-    timer_start = time.time()  # Timer start time
+    timer_start = time()  # Timer start time
     timer_duration = 120  # 2 minutes in seconds
+
+    while key != ESC and lives > 0:
+        # Calculate the time remaining on the timer
+        time_remaining = timer_duration - (time() - timer_start)
+        minutes = int(time_remaining // 60)
+        seconds = int(time_remaining % 60)
+
+        # Display the game information
+        win.addnstr(0, 2, "Score: " + str(score) + " ", 20)
+        win.addnstr(0, sw - 10, "Lives: " + str(lives) + " ", 20)
+        win.addnstr(0, sw // 2 - 7, f"Time: {minutes:02d}:{seconds:02d}", 20)
+
+        # Check if the timer has run out
+        if time_remaining <= 0:
+            lives = 0  # User loses when the timer runs out
+            break
