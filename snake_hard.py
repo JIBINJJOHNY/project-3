@@ -93,11 +93,6 @@ def main(stdscr):
             if lives == 0:
                 break
             else:
-                hit_index = snake.index((y, x))
-                snake = snake[
-                    : hit_index + 1
-                ]  # Keep only the collided part of the snake
-                snake[0] = (y, x)  # Update the head position
                 time.sleep(1)
                 continue
         if (y, x) in obstacles:
@@ -109,3 +104,23 @@ def main(stdscr):
                 continue
 
         snake.insert(0, (y, x))
+        if not food:
+            while True:
+                food = (
+                    randint(1, sh - 1),
+                    randint(1, sw - 1),
+                )
+                if food not in snake and food not in obstacles:
+                    break
+            win.addch(food[0], food[1], "*")
+        elif snake[0] == food:
+            score += 1
+            food = ()
+        else:
+            last = snake.pop()
+            win.addch(last[0], last[1], " ")
+
+        for obstacle in obstacles:
+            win.addch(obstacle[0], obstacle[1], "X")
+
+        win.addch(snake[0][0], snake[0][1], "#")
