@@ -171,3 +171,10 @@ class GameMenu:
         the provided game function and the curses module
         """
         curses.wrapper(game_function)
+
+    def start(self):
+        """
+        The start method initializes the main menu and begins the game loop.
+        """
+        self.show_menu()
+        self.start_game()
