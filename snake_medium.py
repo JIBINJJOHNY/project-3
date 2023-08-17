@@ -85,3 +85,24 @@ def main(stdscr):
                 continue
 
         snake.insert(0, (y, x))
+
+        if not food:
+            while True:
+                food = (
+                    randint(1, sh - 1),
+                    randint(1, sw - 1),
+                )
+                if food not in snake and food not in obstacles:
+                    break
+            win.addch(food[0], food[1], "*")
+        elif snake[0] == food:
+            score += 1
+            food = ()
+        else:
+            last = snake.pop()
+            win.addch(last[0], last[1], " ")
+
+        for obstacle in obstacles:
+            win.addch(obstacle[0], obstacle[1], "X")
+
+        win.addch(snake[0][0], snake[0][1], "#")
