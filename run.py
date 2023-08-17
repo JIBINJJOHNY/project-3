@@ -113,3 +113,33 @@ class GameMenu:
 
         except Exception as e:
             print("Error fetching or displaying leaderboard data:", str(e))
+
+    def start_game(self):
+        """
+        start_game method contains the main game loop which responds to the user's
+        menu choices and starts the game or displays instructions/leaderboards.
+        """
+        while True:
+            if self.current_state == 0:
+                self.show_levels_menu()
+
+                if self.current_state == 0:
+                    self.start_hard_level()
+
+                elif self.current_state == 1:
+                    self.start_medium_level()
+
+                elif self.current_state == 2:
+                    self.start_easy_level()
+
+                elif self.current_state == 3:
+                    self.show_menu()  # Go back to main menu
+
+            elif self.current_state == 1:
+                self.show_instructions()
+
+            elif self.current_state == 2:
+                self.show_leaderboard()
+
+            elif self.current_state == 3:
+                break  # Quit the game
