@@ -164,3 +164,10 @@ class GameMenu:
         """
         curses.wrapper(self.start_snake_game(snake_hard_main))
         self.show_levels_menu()
+
+    def start_snake_game(self, game_function):
+        """
+        start_snake_game method is a wrapper that starts the snake game using
+        the provided game function and the curses module
+        """
+        curses.wrapper(game_function)
