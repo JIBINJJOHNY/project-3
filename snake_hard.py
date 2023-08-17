@@ -156,3 +156,82 @@ def main(stdscr):
     save_choice = None
     while save_choice not in [ord("y"), ord("n")]:
         save_choice = win.getch()
+    # If user chose to save the score, you can add your saving logic here
+    SCOPE = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive.file",
+        "https://www.googleapis.com/auth/drive",
+    ]
+    # Initialize current_user_name
+    current_user_name = ""
+    if save_choice == ord("y"):
+        win.clear()
+        win.addstr(sh // 2, sw // 2 - 15, "Enter your name:", curses.A_BOLD)
+        win.refresh()
+
+        # Get the user's name input
+        name = ""
+        name_row = sh // 2 + 1  # Calculate the row for displaying the name
+        name_col = sw // 2 - 15  # Calculate the column for displaying the name
+        while True:
+            char = win.getch()
+            if char == 10:  # Enter key
+                break
+            elif 32 <= char <= 126:  # ASCII printable characters
+                name += chr(char)
+                win.addstr(name_row, name_col, name, curses.A_NORMAL)
+        # Refresh the screen once after the name has been entered
+        win.refresh()
+        # Save the score and name to Google Sheets
+        # Assign the name to current_user_name
+        current_user_name = name
+    # Clear the window again before displaying the top scorers list
+    win.clear()
+    try:
+        CREDS = Credentials.from_service_account_file("creds.json")
+        SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+        GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+        SHEET = GSPREAD_CLIENT.open("slithering_challenge")
+        hard = SHEET.worksheet("hard")
+        hard.append_row([name, score])
+        top_scorers = hard.get_all_values()[1:]
+        sorted_top_scorers = sorted(top_scorers, key=lambda x: int(x[1]), reverse=True)
+    except Exception as e:
+        # Handle any errors that might occur during the API call
+        win.addstr(sh // 2, sw // 2 - 15, "Error fetching top scorers.", curses.A_BOLD)
+        win.addstr(sh // 2 + 1, sw // 2 - 15, str(e))
+        win.refresh()
+    # Display the top 10 scorers list
+
+    try:
+        win.clear()  # Clear the window before displaying the top scorers list
+        win.addstr(sh // 2 - 5, sw // 2 - 15, "Top 10 Scorers", curses.A_BOLD)
+        # Variable to track if the current user's entry is highlighted
+        current_user_highlighted = False
+        for i, (name, s) in enumerate(sorted_top_scorers[:10], start=1):
+            position_str = f"{i}. {name}: {s}"
+            if name == current_user_name and int(s) == score:
+                # Highlight the current user's entry
+                win.addstr(
+                    sh // 2 - 5 + i, sw // 2 - 15, position_str, curses.A_STANDOUT
+                )
+                current_user_highlighted = True
+            else:
+                win.addstr(sh // 2 - 5 + i, sw // 2 - 15, position_str)
+        if not current_user_highlighted and len(sorted_top_scorers) < 10:
+            i += 1
+            # If the current user's entry wasn't highlighted earlier, highlight it now
+            position_str = f"{i}. {current_user_name}: {score}"
+            win.addstr(sh // 2 - 5 + i, sw // 2 - 15, position_str, curses.A_STANDOUT)
+        win.refresh()
+        win.getch()
+        # Add a delay to allow the user more time to view the content
+        time.sleep(10)
+    except Exception as e:
+        # Handle any errors that might occur during the API call
+        win.clear()
+        win.addstr(sh // 2, sw // 2 - 15, "Error fetching top scorers.", curses.A_BOLD)
+        win.addstr(sh // 2 + 1, sw // 2 - 15, str(e))
+
+
+curses.wrapper(main)
