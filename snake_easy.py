@@ -136,3 +136,9 @@ def main(stdscr):
         "https://www.googleapis.com/auth/drive.file",
         "https://www.googleapis.com/auth/drive",
     ]
+    # Initialize current_user_name
+    current_user_name = ""
+    if save_choice == ord("y"):
+        win.clear()
+        win.addstr(sh // 2, sw // 2 - 15, "Enter your name:", curses.A_BOLD)
+        win.refresh()
