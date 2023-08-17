@@ -157,3 +157,10 @@ class GameMenu:
         """
         curses.wrapper(self.start_snake_game(snake_medium_main))
         self.show_levels_menu()  # Go back to level selection after the game
+
+    def start_hard_level(self):
+        """
+        start_hard_level method starts the snake game for the hard level
+        """
+        curses.wrapper(self.start_snake_game(snake_hard_main))
+        self.show_levels_menu()
