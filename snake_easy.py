@@ -113,3 +113,15 @@ def main(stdscr):
     win.getch()
     # Add a delay before displaying the save score prompt
     sleep(3)
+
+    # Clear the window again before displaying the prompt
+
+    win.clear()
+
+    # Display the save score prompt and options
+    win.addstr(
+        sh // 2 - 2, sw // 2 - 15, "Do you want to save your score?", curses.A_BOLD
+    )
+    win.addstr(sh // 2, sw // 2 - 6, "Yes", curses.A_BOLD)
+    win.addstr(sh // 2, sw // 2 + 1, "No", curses.A_BOLD)
+    win.refresh()
