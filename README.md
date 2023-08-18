@@ -28,3 +28,27 @@ Navigate your snake through the playing field, collect food to grow, and avoid o
     After completing a level or when prompted, decide whether to save your score.
     If you choose to save your score, enter your name using ASCII characters.
     Your score will be saved to the game's leaderboard, where you can compete against other players.
+
+## User Stories
+### As a player new to the game
+I want to understand the game's objective and controls quickly,So that I can start playing without any confusion.
+    
+### As a competitive player
+I want to challenge myself with different difficulty levels,So that I can test my skills against varying obstacles and time limits.
+### As a player in the middle of the game
+I want to collect food to grow my snake and increase my score,So that I can achieve a higher ranking on the leaderboard.
+## As a cautious player
+I want to navigate the snake carefully to avoid colliding with walls or obstacles,So that I can maintain my lives and stay in the game.
+  
+### As a time-conscious player,
+
+I want to complete each level's objectives before the timer runs out,So that I can progress to the next level and avoid losing a life.
+### As a skilled player,
+
+I want to strategize and plan my moves to maximize food collection while avoiding collisions,So that I can achieve a top score and outperform other players.
+### As a player who enjoys challenges,
+
+I want to face different types of obstacles and changing snake speeds in each level,So that I can experience varied gameplay and keep the game interesting.
+### As a competitive player,
+
+I want to save my score to the leaderboard after completing a level,So that I can see how I rank against other players and strive to improve.
