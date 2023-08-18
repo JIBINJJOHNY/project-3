@@ -23,7 +23,7 @@ def main(stdscr):
     win = curses.newwin(sh + 1, sw + 1, 0, 0)
     win.keypad(1)
     curses.noecho()
-    curses.curs_set(0)
+    #curses.curs_set(0)
     win.border(0)
     win.nodelay(1)
     snake = [(sh // 2, sw // 2), (sh // 2, sw // 2 - 1), (sh // 2, sw // 2 - 2)]
