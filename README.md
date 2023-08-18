@@ -81,6 +81,28 @@ I want to save my score to the leaderboard after completing a level,So that I ca
 - [Heroku](https://www.heroku.com/home) was used to deploy the project.
 
 ---
+## Bugs
+
++ **Solved bugs**
+
+1. When I select the leaderboard menu and I get the same name as the "Start game", "Instructions", "Leaderboard", "Quit" options from the main menu.
+ - *Solutions:* Create a new instance for level selection
+```python
+    def show_leaderboard(self):
+    level_menu = TerminalMenu(["Easy", "Medium", "Hard", "Back"]) 
+    level_menu_entry_index = level_menu.show()
+
+    if level_menu_entry_index in [0, 1, 2]:
+        level_names = ["easy", "medium", "hard"]
+        level_name = level_names[level_menu_entry_index]
+        self.display_leaderboard(level_name)
+
+    elif level_menu_entry_index == 3:
+        self.show_menu()  # Go back to main menu
+
+```
+
+
 ## Testing
 
 Please refer to the [TESTING.md](TESTING.md) file for all test related documentation.
