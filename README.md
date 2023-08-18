@@ -120,5 +120,11 @@ Please refer to the [TESTING.md](TESTING.md) file for all test related documenta
 ## Credits
 - Terminal menu: [Simple Terminal Menu](https://pypi.org/project/simple-term-menu/).
 - [Heroku](https://www.heroku.com/home) was used to deploy the project. 
-- Inspiration of snake game [Iuliia Konovalova](https://github.com/     IuliiaKonovalova) on GitHub
+- Inspiration of snake game [Iuliia Konovalova](https://github.com/IuliiaKonovalova) on GitHub.
 - Inspiration of snake game [Mision Codigo](https://www.youtube.com/@MisionCodigo/videos) on his YouTube channel.
+
+## Acknowledgements
+- [Iuliia Konovalova](https://github.com/IuliiaKonovalova) my mentor has been a great supporter, guiding me through the development of the project and helping me to learn a lot of new things by challenging me to do something new.
+- [Code Institute](https://codeinstitute.net/de/)  tutors and Slack community members for their support and help.
+- [Iuliia Konovalova](https://github.com/IuliiaKonovalova) for snake game idea.
+- [Mision Codigo](https://www.youtube.com/@MisionCodigo/videos) snake game idea.
