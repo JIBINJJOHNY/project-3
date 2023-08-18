@@ -3,16 +3,23 @@ from random import randint
 from time import sleep
 import gspread
 from google.oauth2.service_account import Credentials
-
+from colorama import init, Fore, Back, Style
 
 def main(stdscr):
     """
     main function that controls the game.
     It receives a stdscr object which represents the game screen.
     """
+    
     stdscr.clear()
+    init(autoreset=True)  # Initialize Colorama
+    curses.start_color()  # Initialize color pairs in curses
+    curses.init_pair(1, curses.COLOR_YELLOW, curses.COLOR_BLACK)  # Snake color
+    curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)  # Food color
+    curses.init_pair(3, curses.COLOR_GREEN, curses.COLOR_BLACK)  # Obstacle color
     sh = 20
     sw = 60
+
     win = curses.newwin(sh + 1, sw + 1, 0, 0)
     win.keypad(1)
     curses.noecho()
@@ -95,7 +102,7 @@ def main(stdscr):
                 )
                 if food not in snake and food not in obstacles:
                     break
-            win.addch(food[0], food[1], "*")
+            win.addch(food[0], food[1], "*",curses.A_BOLD | curses.color_pair(2))
         elif snake[0] == food:
             score += 1
             food = ()
@@ -104,9 +111,9 @@ def main(stdscr):
             win.addch(last[0], last[1], " ")
 
         for obstacle in obstacles:
-            win.addch(obstacle[0], obstacle[1], "X")
+            win.addch(obstacle[0], obstacle[1], "X", curses.A_BOLD | curses.color_pair(3))
 
-        win.addch(snake[0][0], snake[0][1], "#")
+        win.addch(snake[0][0], snake[0][1], "#", curses.A_BOLD | curses.color_pair(1))
 
     # Clear the window before displaying the game over message
     win.clear()

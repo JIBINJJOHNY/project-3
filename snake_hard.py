@@ -3,7 +3,7 @@ from random import randint
 from time import sleep, time
 import gspread
 from google.oauth2.service_account import Credentials
-
+from colorama import init, Fore, Back, Style
 
 def main(stdscr):
     """
@@ -11,6 +11,12 @@ def main(stdscr):
     It receives the stdscr object, which represents the game screen.
     """
     stdscr.clear()
+    init(autoreset=True)  # Initialize Colorama
+    curses.start_color()  # Initialize color pairs in curses
+    curses.init_pair(1, curses.COLOR_YELLOW, curses.COLOR_BLACK)  # Snake color
+    curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)  # Food color
+    curses.init_pair(3, curses.COLOR_GREEN, curses.COLOR_BLACK)  # Obstacle color
+
     sh = 20
     sw = 60
 
@@ -29,6 +35,8 @@ def main(stdscr):
         (sh // 2, sw // 2 - 10),
         (sh // 2 - 5, sw // 2 + 5),
         (sh // 2 + 5, sw // 2 - 7),
+        (sh // 2 + 6, sw // 2 - 12),
+        (sh // 2 + 8, sw // 2 - 15),
     ]
     ESC = 27
     key = curses.KEY_RIGHT
@@ -112,7 +120,7 @@ def main(stdscr):
                 )
                 if food not in snake and food not in obstacles:
                     break
-            win.addch(food[0], food[1], "*")
+            win.addch(food[0], food[1], "*",curses.A_BOLD | curses.color_pair(2))
         elif snake[0] == food:
             score += 1
             food = ()
@@ -121,10 +129,9 @@ def main(stdscr):
             win.addch(last[0], last[1], " ")
 
         for obstacle in obstacles:
-            win.addch(obstacle[0], obstacle[1], "X")
+            win.addch(obstacle[0], obstacle[1], "X", curses.A_BOLD | curses.color_pair(3))
 
-        win.addch(snake[0][0], snake[0][1], "#")
-        win.addch(snake[0][0], snake[0][1], "#")
+        win.addch(snake[0][0], snake[0][1], "#", curses.A_BOLD | curses.color_pair(1))
         # Calculate the timeout value for controlling snake speed
         # Increase this value to slow down the snake
         timeout_value = 100 - (len(snake)) // 5 + len(snake) // 30 % 160

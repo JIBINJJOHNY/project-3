@@ -1,6 +1,7 @@
 import curses
 from random import randint
 from time import sleep
+from colorama import init, Fore, Back, Style 
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -11,13 +12,15 @@ def main(stdscr):
     initializes the game variables such as
     the snake's position, food position, score, and lives
     """
-    # Set up curses environment
-    curses.noecho()
-    curses.curs_set(False)  # Hide the cursor
+    curses.curs_set(0)  # Hide the cursor
     stdscr.clear()
+    init(autoreset=True) 
+    curses.start_color()  # Initialize color pairs in curses
+    curses.init_pair(1, curses.COLOR_YELLOW, curses.COLOR_BLACK)  # Snake color
+    curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)  # Food color
     sh = 20
     sw = 60
-
+    
     win = curses.newwin(sh + 1, sw + 1, 0, 0)
     win.keypad(1)
     curses.noecho()
@@ -95,7 +98,7 @@ def main(stdscr):
                 )
                 if food not in snake:
                     break
-            win.addch(food[0], food[1], "*")  # Display the food
+            win.addch(food[0], food[1], "*", curses.A_BOLD | curses.color_pair(2))  # Display the food
         # Check if snake has eaten the food
         elif snake[0] == food:
             score += 1
@@ -104,7 +107,7 @@ def main(stdscr):
             last = snake.pop()
             win.addch(last[0], last[1], " ")  # Clear the tail position
 
-        win.addch(snake[0][0], snake[0][1], "#")  # Display the snake's head
+        win.addch(snake[0][0], snake[0][1], "#", curses.A_BOLD | curses.color_pair(1))  # Display the snake's head
 
     # Clear the window before displaying the game over message
     win.clear()
