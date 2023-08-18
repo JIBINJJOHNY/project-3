@@ -217,6 +217,5 @@ def main():
     game_menu = GameMenu()
     game_menu.start()
 
-
 if __name__ == "__main__":
     main()

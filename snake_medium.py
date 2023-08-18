@@ -91,7 +91,6 @@ def main(stdscr):
             else:
                 sleep(1)
                 continue
-
         snake.insert(0, (y, x))
 
         if not food:

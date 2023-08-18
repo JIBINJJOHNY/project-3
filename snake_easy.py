@@ -12,7 +12,6 @@ def main(stdscr):
     initializes the game variables such as
     the snake's position, food position, score, and lives
     """
-    curses.curs_set(0)  # Hide the cursor
     stdscr.clear()
     init(autoreset=True) 
     curses.start_color()  # Initialize color pairs in curses
@@ -20,11 +19,11 @@ def main(stdscr):
     curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)  # Food color
     sh = 20
     sw = 60
-    
+   
     win = curses.newwin(sh + 1, sw + 1, 0, 0)
     win.keypad(1)
     curses.noecho()
-    curses.curs_set(0)
+    #curses.curs_set(0)
     win.border(0)
     win.nodelay(1)
 
