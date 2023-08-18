@@ -234,4 +234,5 @@ def main(stdscr):
         win.addstr(sh // 2 + 1, sw // 2 - 15, str(e))
 
 
-curses.wrapper(main)
+if __name__ == "__main__":
+    curses.wrapper(main)

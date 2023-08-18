@@ -79,3 +79,46 @@ I want to save my score to the leaderboard after completing a level,So that I ca
 - [Git](https://git-scm.com/) was used for the version control of the website.
 - [GitHub](https://github.com/) was used to host the code of the website.
 - [Heroku](https://www.heroku.com/home) was used to deploy the project.
+
+---
+## Testing
+
+Please refer to the [TESTING.md](TESTING.md) file for all test related documentation.
+
+---
+
+## Deployment
+- The program was deployed to [Heroku](https://dashboard.heroku.com).
+- The program can be reached by the [link]()
+### To deploy the project as an application that can be **run locally**:
+*Note:*
+  1. This project requires you to have Python installed on your local PC:
+  - `sudo apt install python3`
+  1. You will also need pip installed to allow the installation of modules the application uses.
+  - `sudo apt install python3-pip`
+  Create a local copy of the GitHub repository by following one of the two processes below:
+
+- Download ZIP file:
+  1. Go to the [GitHub Repo page](https://github.com/JIBINJJOHNY/project-3).
+  1. Click the Code button and download the ZIP file containing the project.
+  1. Extract the ZIP file to a location on your PC.
+
+- Clone the repository:
+  1. Open a folder on your computer with the terminal.
+  1. Run the following command
+  - `git clone https://github.com`
+
+- Alternatively, if using Gitpod, you can click below to create your own workspace using this repository.
+    [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)]()
+
+  1. Install Python module dependencies:
+     1. Navigate to the folder madlib_with_python by executing the command:
+      - `cd madlib_with_python`
+     1. Run the command pip install -r requirements.txt
+      - `pip3 install -r requirements.txt`
+
+## Credits
+- Terminal menu: [Simple Terminal Menu](https://pypi.org/project/simple-term-menu/).
+- [Heroku](https://www.heroku.com/home) was used to deploy the project. 
+- Inspiration of snake game [Iuliia Konovalova](https://github.com/     IuliiaKonovalova) on GitHub
+- Inspiration of snake game [Mision Codigo](https://www.youtube.com/@MisionCodigo/videos) on his YouTube channel.

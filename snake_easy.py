@@ -212,4 +212,5 @@ def main(stdscr):
 
 
 # Function is used to safely run the main function, setting up and cleaning up the terminal environment correctly.
-curses.wrapper(main)
+if __name__ == "__main__":
+    curses.wrapper(main)
