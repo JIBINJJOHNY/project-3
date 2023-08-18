@@ -1,5 +1,7 @@
 # Slithering Challenge
 
+![Responsive Mockup](./documents/responsive_mockup.png)
+
 The "Slithering Challenge" is a multi-level snake game built using the Python programming language and the curses library for terminal-based graphics. The game provides an engaging and challenging experience for players as they control a snake to collect food, avoid obstacles, and compete for high scores.
 
 
@@ -178,72 +180,6 @@ Please refer to the [TESTING.md](TESTING.md) file for all test related documenta
   1. Click "Open app" to launch the application inside a web page.
 
       - ![View Button](./documents/view_app.png)
-
-
-### To deploy the project to Render so it can be run as a remote web application:
-
-Link to the deployed application on Render: [The Maddest Madlib](https://the-maddest-madlib.onrender.com)
-
-1. Create a new Render account if you don't already have one here [Render](https://render.com/).
-
-2. Create a new application on the following page here [New Render App](https://dashboard.render.com/), choose **Webserver**:
-
-    - ![New Render App](documentation/deployment/render_new_web_service.png)
-
-3. Select the GitHub option and connect the application to the repository you created.
-
-    - ![GitHub Option](documentation/deployment/render_configure_github_account.png)
-
-4. Search for the repository you created and click "Connect."
-
-    - ![Connect to GitHub](documentation/deployment/render_connect_repository.png)
-
-    - ![Connect to GitHub](documentation/deployment/render_connect_repository_connect.png)
-
-5. Create name for the application
-
-    - ![Create Application Name](documentation/deployment/render_create_name.png)
-
-6. Select the region where you want to deploy the application.
-
-    - ![Select Region](documentation/deployment/render_select_region.png)
-
-7. Select branch to deploy.
-
-    - ![Select Branch](documentation/deployment/render_select_branch.png)
-
-8. Select environment.
-
-    - ![Select Environment Variables](documentation/deployment/render_select_environment.png)
-
-9. Render build command: `pip3 install -r requirements.txt && npm install`
-
-    - ![Render Build Command](documentation/deployment/render_build_command.png)
-
-10. Render start command: `node index.js`
-
-    - ![Render Start Command](documentation/deployment/render_start_command.png)
-
-11. Select Free plan.
-
-    - ![Select Free Plan](documentation/deployment/render_payment_info.png)
-
-12. Click on "Advanced" settings.
-
-    - ![Advanced Settings](documentation/deployment/render_advanced_settings.png)
-
-13. Add the following environment variables:
-
-    - Key: PORT Value: 8000
-    - Key: PYTHON_VERSION Value: 3.10.7
-
-    - ![Add Environment Variables](documentation/deployment/render_advanced_settings_variables.png)
-
-14. Click "Create Web Service."
-
-    - ![Save Web Service](documentation/deployment/render_create_web_service.png)
-
-15. Wait for the completion of the deployment.
 
 
 ## Credits
