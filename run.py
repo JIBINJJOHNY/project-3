@@ -55,7 +55,7 @@ class GameMenu:
         "Slithering Challenge!",
         "",
         "How to Play:",
-        "1. Use the arrow keys (Up, Down, Left, Right) to control the snake's movement.",
+        "1. Use the arrow keys (Up, Down, Left, Right)to control the snake's movement.",
         "2. Your goal is to collect the red food items to increase your score and grow your snake's length.",
         "3. Be cautious not to run into the walls or collide with your own body, as this will cost you a life.",
         "4. The snake's length will increase with each collected food, making it both a reward and a challenge to manage.",
