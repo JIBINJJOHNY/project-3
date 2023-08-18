@@ -7,7 +7,8 @@ from google.oauth2.service_account import Credentials
 
 def main(stdscr):
     """
-    main function that controls the game. It receives a stdscr object which represents the game screen.
+    main function that controls the game.
+    It receives a stdscr object which represents the game screen.
     """
     stdscr.clear()
     sh = 20
@@ -198,7 +199,8 @@ def main(stdscr):
                 win.addstr(sh // 2 - 5 + i, sw // 2 - 15, position_str)
         if not current_user_highlighted and len(sorted_top_scorers) < 10:
             i += 1
-            # If the current user's entry wasn't highlighted earlier, highlight it now
+            # If the current user's entry wasn't highlighted earlier,
+            #  highlight it now
             position_str = f"{i}. {current_user_name}: {score}"
             win.addstr(sh // 2 - 5 + i, sw // 2 - 15, position_str, curses.A_STANDOUT)
         win.refresh()

@@ -10,7 +10,9 @@ from snake_hard import main as snake_hard_main
 class GameMenu:
     def __init__(self):
         # Initialize the main menu using TerminalMenu
-        self.menu = TerminalMenu(["Start Game", "Instructions", "Leaderboard", "Quit"])
+        self.menu = TerminalMenu(
+            ["Start Game", "Instructions", "Leaderboard", "Quit"]
+            )
         # OAuth2 scopes for Google Sheets and Drive API
         self.SCOPE = [
             "https://www.googleapis.com/auth/spreadsheets",
@@ -25,7 +27,8 @@ class GameMenu:
 
     def show_menu(self):
         """
-        show_menu method displays the main menu and stores the chosen menu option's index in current_state
+        show_menu method displays the main menu and
+        stores the chosen menu option's index in current_state
 
         """
         print("Welcome to Slithering Challenge\n")  # Heading
@@ -34,7 +37,8 @@ class GameMenu:
 
     def show_levels_menu(self):
         """
-        show_levels_menu method displays a submenu for selecting game levels and updates current_state
+        show_levels_menu method displays a submenu for selecting game
+          levels and updates current_state
         """
         heading = "Levels"
         sub_options = ["Easy", "Medium", "Hard", "Back"]
@@ -44,20 +48,41 @@ class GameMenu:
 
     def show_instructions(self):
         """
-        show_instructions method displays the game instructions and provides options to return to the main menu.
+        show_instructions method displays the game instructions and
+        provides options to return to the main menu.
         """
         instructions = [
-            "Welcome to Snake Game!",
-            "Use the arrow keys to control the snake's movement.",
-            "Collect the red food to increase your score.",
-            "Be careful not to run into the walls or your own body!",
-            "You have three lives. Losing all lives will end the game.",
-            "Press 'Esc' to pause the game at any time.",
-            "After the game is over, you can choose to save your score.",
-            "Press 'Yes' to save your score and see the leaderboard.",
-            "Press 'No' to return to the level selection screen.",
-            "Press '0' to go back to the main menu.",
-        ]
+        "Slithering Challenge!",
+        "",
+        "How to Play:",
+        "1. Use the arrow keys (Up, Down, Left, Right) to control the snake's movement.",
+        "2. Your goal is to collect the red food items to increase your score and grow your snake's length.",
+        "3. Be cautious not to run into the walls or collide with your own body, as this will cost you a life.",
+        "4. The snake's length will increase with each collected food, making it both a reward and a challenge to manage.",
+        "",
+        "Game Elements:",
+        "- Snake: Control the snake's movement with the arrow keys. The snake's head is denoted by a '#', and the body by '='.",
+        "- Red Food: Collect the red food represented by '*'. Each collected food adds to your score and length.",
+        "- Walls: The game area is bordered by walls. Colliding with them results in the loss of a life.",
+        "- Lives: You start with three lives. Losing all lives will end the game.",
+        "- Pause: Press 'Esc' at any time to pause the game and catch your breath. Resume by pressing any key.",
+        "",
+        "Scoring:",
+        "- Each collected food adds one point to your score.",
+        "- The longer your snake, the faster it moves, adding a strategic challenge to the game.",
+        "",
+        "After the Game:",
+        "- Once you run out of lives, the game ends, and you'll be presented with options.",
+        "- Press 'Yes' to save your score and see the leaderboard, competing with others for the top spot.",
+        "- Press 'No' to return to the level selection screen.",
+        "- Press '0' to go back to the main menu and explore other game options.",
+        "",
+        "Tips:",
+        "- Plan your movements carefully to avoid collisions with walls and your snake's body.",
+        "- Keep an eye on the snake's length; a longer snake requires more precise maneuvers.",
+        "",
+        "Enjoy the challenge and strive to top the leaderboard!"
+    ]
 
         print("\n".join(instructions))
         while True:
@@ -68,7 +93,8 @@ class GameMenu:
 
     def choose_leaderboard_level(self):
         """
-        choose_leaderboard_level method prompts the user to choose a leaderboard level.
+        choose_leaderboard_level method prompts the user to choose a
+        leaderboard level.
         """
         print("Which level's leaderboard do you want to see?")
         level_menu_entry_index = self.menu.show()
@@ -76,7 +102,8 @@ class GameMenu:
 
     def show_leaderboard(self):
         """
-        show_leaderboard method displays the chosen leaderboard or goes back to the main menu.
+        show_leaderboard method displays the chosen leaderboard or goes back
+        to the main menu.
         """
         level_menu = TerminalMenu(["Easy", "Medium", "Hard", "Back"])
         level_menu_entry_index = level_menu.show()
@@ -91,13 +118,14 @@ class GameMenu:
 
     def display_leaderboard(self, level_name):
         """
-        display_leaderboard method fetches and displays the leaderboard data for a specific level.
+        display_leaderboard method fetches and displays the leaderboard data
+        for a specific level.
         """
         try:
             level_worksheet = self.SHEET.worksheet(level_name)
             level_data = level_worksheet.get_all_values()
 
-            # Skip the header row and sort the level data by score in descending order
+            # Sort the level data by score in descending order
             sorted_level_data = sorted(
                 (
                     entry for entry in level_data[1:] if entry[1]
@@ -116,8 +144,9 @@ class GameMenu:
 
     def start_game(self):
         """
-        start_game method contains the main game loop which responds to the user's
-        menu choices and starts the game or displays instructions/leaderboards.
+        start_game method contains the main game loop which
+        responds to the user's menu choices and starts the game
+        or displays instructions/leaderboards.
         """
         while True:
             if self.current_state == 0:

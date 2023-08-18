@@ -196,9 +196,12 @@ def main(stdscr):
                 win.addstr(sh // 2 - 5 + i, sw // 2 - 15, position_str)
         if not current_user_highlighted and len(sorted_top_scorers) < 10:
             i += 1
-            # If the current user's entry wasn't highlighted earlier, highlight it now
+            # If the current user's entry wasn't highlighted earlier,
+            # highlight it now
             position_str = f"{i}. {current_user_name}: {score}"
-            win.addstr(sh // 2 - 5 + i, sw // 2 - 15, position_str, curses.A_STANDOUT)
+            win.addstr(
+                sh // 2 - 5 + i, sw // 2 - 15, position_str, curses.A_STANDOUT
+                )
         win.refresh()
         win.getch()
         # Add a delay to allow the user more time to view the content
@@ -206,11 +209,14 @@ def main(stdscr):
     except Exception as e:
         # Handle any errors that might occur during the API call
         win.clear()
-        win.addstr(sh // 2, sw // 2 - 15, "Error fetching top scorers.", curses.A_BOLD)
+        win.addstr(
+            sh // 2, sw // 2 - 15, "Error fetching top scorers.", curses.A_BOLD
+            )
         win.addstr(sh // 2 + 1, sw // 2 - 15, str(e))
         win.refresh()
 
 
-# Function is used to safely run the main function, setting up and cleaning up the terminal environment correctly.
+# Function is used to safely run the main function,
+#  setting up and cleaning up the terminal environment correctly.
 if __name__ == "__main__":
     curses.wrapper(main)
