@@ -11,6 +11,7 @@ def main(stdscr):
     initializes the game variables such as
     the snake's position, food position, score, and lives
     """
+    curses.curs_set(0)  # Hide the cursor
     stdscr.clear()
     sh = 20
     sw = 60
