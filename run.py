@@ -158,6 +158,7 @@ class GameMenu:
                 elif self.current_state == 1:
                     self.start_medium_level()
 
+
                 elif self.current_state == 2:
                     self.start_hard_level()
 
@@ -173,27 +174,6 @@ class GameMenu:
             elif self.current_state == 3:
                 break  # Quit the game
 
-    def start_easy_level(self):
-        """
-        start_easy_level method starts the snake game for the easy level
-        """
-        curses.wrapper(self.start_snake_game(snake_easy_main))
-        self.show_levels_menu()  # Go back to level selection after the game
-
-    def start_medium_level(self):
-        """
-        start_medium_level method starts the snake game for the medium leve
-        """
-        curses.wrapper(self.start_snake_game(snake_medium_main))
-        self.show_levels_menu()  # Go back to level selection after the game
-
-    def start_hard_level(self):
-        """
-        start_hard_level method starts the snake game for the hard level
-        """
-        curses.wrapper(self.start_snake_game(snake_hard_main))
-        self.show_levels_menu()
-
     def start_snake_game(self, game_function):
         """
         start_snake_game method is a wrapper that starts the snake game using
@@ -201,6 +181,26 @@ class GameMenu:
         """
         curses.wrapper(game_function)
 
+    def start_easy_level(self):
+        """
+        start_easy_level method starts the snake game for the easy level
+        """
+        self.start_snake_game(snake_easy_main)
+        self.show_levels_menu()  # Go back to level selection after the game
+
+    def start_medium_level(self):
+        """
+        start_medium_level method starts the snake game for the medium level
+        """
+        self.start_snake_game(snake_medium_main)
+        self.show_levels_menu()  # Go back to level selection after the game
+
+    def start_hard_level(self):
+        """
+        start_hard_level method starts the snake game for the hard level
+        """
+        self.start_snake_game(snake_hard_main)
+        self.show_levels_menu()
     def start(self):
         """
         The start method initializes the main menu and begins the game loop.
