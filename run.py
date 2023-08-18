@@ -153,13 +153,13 @@ class GameMenu:
                 self.show_levels_menu()
 
                 if self.current_state == 0:
-                    self.start_hard_level()
+                    self.start_easy_level()
 
                 elif self.current_state == 1:
                     self.start_medium_level()
 
                 elif self.current_state == 2:
-                    self.start_easy_level()
+                    self.start_hard_level()
 
                 elif self.current_state == 3:
                     self.show_menu()  # Go back to main menu
