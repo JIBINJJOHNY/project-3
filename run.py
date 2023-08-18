@@ -41,7 +41,7 @@ class GameMenu:
           levels and updates current_state
         """
         sub_options = ["Easy", "Medium", "Hard", "Back"]
-        sub_menu = TerminalMenu(sub_options)  # Create a submenu
+        sub_menu = TerminalMenu(sub_options, title="LEVELS")  
         sub_menu_entry_index = sub_menu.show()  # Display the submenu
         self.current_state = sub_menu_entry_index
 
@@ -97,17 +97,17 @@ class GameMenu:
         choose_leaderboard_level method prompts the user to choose a
         leaderboard level.
         """
-        print("Which level's leaderboard do you want to see?")
-        level_menu_entry_index = self.menu.show()
-        return level_menu_entry_index
+        sub_options = ["Easy", "Medium", "Hard", "Back"]
+        sub_menu = TerminalMenu(sub_options, title="Which level's leaderboard do you want to see?")  
+        sub_menu_entry_index = sub_menu.show()  # Display the submenu
+        return sub_menu_entry_index
 
     def show_leaderboard(self):
         """
         show_leaderboard method displays the chosen leaderboard or goes back
         to the main menu.
         """
-        level_menu = TerminalMenu(["Easy", "Medium", "Hard", "Back"])
-        level_menu_entry_index = level_menu.show()
+        level_menu_entry_index = self.choose_leaderboard_level()
 
         if level_menu_entry_index in [0, 1, 2]:
             level_names = ["easy", "medium", "hard"]
