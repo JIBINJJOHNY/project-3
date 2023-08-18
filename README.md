@@ -37,7 +37,7 @@ I want to understand the game's objective and controls quickly,So that I can sta
 I want to challenge myself with different difficulty levels,So that I can test my skills against varying obstacles and time limits.
 ### As a player in the middle of the game
 I want to collect food to grow my snake and increase my score,So that I can achieve a higher ranking on the leaderboard.
-## As a cautious player
+### As a cautious player
 I want to navigate the snake carefully to avoid colliding with walls or obstacles,So that I can maintain my lives and stay in the game.
   
 ### As a time-conscious player,
@@ -81,69 +81,6 @@ I want to save my score to the leaderboard after completing a level,So that I ca
 - [Heroku](https://www.heroku.com/home) was used to deploy the project.
 
 ---
-## Bugs
-
-+ **Solved bugs**
-
-1. When I select the leaderboard menu and I get the same name as the "Start game", "Instructions", "Leaderboard", "Quit" options from the main menu.
- - *Solutions:* Create a new instance for level selection
-```python
-    def show_leaderboard(self):
-    level_menu = TerminalMenu(["Easy", "Medium", "Hard", "Back"]) 
-    level_menu_entry_index = level_menu.show()
-
-    if level_menu_entry_index in [0, 1, 2]:
-        level_names = ["easy", "medium", "hard"]
-        level_name = level_names[level_menu_entry_index]
-        self.display_leaderboard(level_name)
-
-    elif level_menu_entry_index == 3:
-        self.show_menu()  # Go back to main menu
-
-```
-1. There was a problem highlighting the current user's entry when the user's score within the top 10 list highlight the user name and score, but other users who have the same score were also highlighted when the user saves their score time.
- - *Solutions:* Replace 'current_user_name' with the actual name of the current user.
- ```python
- try:
-    win.clear()  # Clear the window before displaying the top scorers list
-    win.addstr(sh // 2 - 5, sw // 2 - 15, "Top 10 Scorers", curses.A_BOLD)
-
-    # Variable to track if the current user's entry is highlighted
-    current_user_highlighted = False
-
-    for i, (name, s) in enumerate(sorted_top_scorers[:10], start=1):
-        position_str = f"{i}. {name}: {s}"
-        
-        # Check if the name and score match the current user's
-        if name == current_user_name and int(s) == score:
-            # Highlight the current user's entry
-            win.addstr(
-                sh // 2 - 5 + i, sw // 2 - 15, position_str, curses.A_STANDOUT
-            )
-            current_user_highlighted = True
-        else:
-            win.addstr(sh // 2 - 5 + i, sw // 2 - 15, position_str)
-
-    if not current_user_highlighted:
-        position_str = f"{i + 1}. {current_user_name}: {score}"
-        win.addstr(
-            sh // 2 - 5 + i + 1, sw // 2 - 15, position_str, curses.A_STANDOUT
-        )
-  ```
-+ **Unsolved bugs**
-- I try to adds a mechanism to periodically generate new obstacles in the game but it was not worked.
-```python
-  current_time = time.time()
-        if current_time - last_obstacle_time >= obstacle_generation_interval:
-            last_obstacle_time = current_time
-            # Generate new obstacles
-            obstacles = [
-                (random.randint(1, sh - 1), random.randint(1, sw - 1)),
-                (random.randint(1, sh - 1), random.randint(1, sw - 1)),
-                (random.randint(1, sh - 1), random.randint(1, sw - 1)),
-            ]
-  ```
----
 ## Testing
 
 Please refer to the [TESTING.md](TESTING.md) file for all test related documentation.
@@ -152,7 +89,7 @@ Please refer to the [TESTING.md](TESTING.md) file for all test related documenta
 
 ## Deployment
 - The program was deployed to [Heroku](https://dashboard.heroku.com).
-- The program can be reached by the [link]()
+- The program can be reached by the [link](https://slithering-challenge-89678e4c3aff.herokuapp.com/)
 ### To deploy the project as an application that can be **run locally**:
 *Note:*
   1. This project requires you to have Python installed on your local PC:
@@ -169,16 +106,145 @@ Please refer to the [TESTING.md](TESTING.md) file for all test related documenta
 - Clone the repository:
   1. Open a folder on your computer with the terminal.
   1. Run the following command
-  - `git clone https://github.com`
+  - git clone: `https://github.com/JIBINJJOHNY/project-3.git`
 
 - Alternatively, if using Gitpod, you can click below to create your own workspace using this repository.
-    [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)]()
+    [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/new/#https://github.com/JIBINJJOHNY/project-3)
 
   1. Install Python module dependencies:
      1. Navigate to the folder madlib_with_python by executing the command:
-      - `cd madlib_with_python`
+      - `cd project-3`
      1. Run the command pip install -r requirements.txt
       - `pip3 install -r requirements.txt`
+### To deploy the project to Heroku so it can be run as a remote web application:
+- Clone the repository:
+  1. Open a folder on your computer with the terminal.
+  1. Run the following command
+  - `git clone https://github.com/JIBINJJOHNY/project-3.git`
+
+  1. Create your own GitHub repository to host the code.
+  1. Run the command `git remote set-url origin <Your GitHub Repo Path>` to set the remote repository location to your repository.
+
+  1. Push the files to your repository with the following command:
+  `git push`
+  1. Create a Heroku account if you don't already have one here [Heroku](https://dashboard.heroku.com).
+  1. Create a new Heroku application on the following page here [New Heroku App](https://dashboard.heroku.com/apps):
+
+      - ![New Heroku App](./documents/new_heroku.png
+      )
+
+  1. Go to the Deploy tab:
+
+      - ![Deploy Tab](./documents/deploy_tab.png)
+
+      - ![Deployment Method](./documents/deployment_method.png)
+
+  1. Link your GitHub account and connect the application to the repository you created.
+
+      - ![Link GitHub account](./documents/link_to_github.png)
+
+  1. Go to the Settings tab:
+  
+      - ![Settings Tab](./documents/settings.png)
+
+  1. Click "Add buildpack":
+
+      - ![Add Buildpack](./documents/add-buildpack.png)
+
+  1. Add the Python and Node.js buildpacks in the following order:
+
+      - ![Add Python and Node.js](./documents/add_python_n_nodejs.png)
+
+  1. Click "Reveal Config Vars."
+
+      - ![Reveal Config Vars](./documents/config_vars.png)
+
+  1. Add 1 new Config Vars:
+      - Key: PORT Value: 8000
+      - *This Config was provided by [CODE INSTITUTE](https://codeinstitute.net/)*.
+
+  1. Go back to the Deploy tab:
+
+      - ![Deploy Tab](./documents/deploy_tab.png)
+
+  1. Click "Deploy Branch":
+
+      - ![Deploy Branch](./documents/deploy_branch.png)
+
+      - Wait for the completion of the deployment.
+
+      - ![Deploying Branch](./documents/deploying_branch.png)
+
+  1. Click "Open app" to launch the application inside a web page.
+
+      - ![View Button](./documents/view_app.png)
+
+
+### To deploy the project to Render so it can be run as a remote web application:
+
+Link to the deployed application on Render: [The Maddest Madlib](https://the-maddest-madlib.onrender.com)
+
+1. Create a new Render account if you don't already have one here [Render](https://render.com/).
+
+2. Create a new application on the following page here [New Render App](https://dashboard.render.com/), choose **Webserver**:
+
+    - ![New Render App](documentation/deployment/render_new_web_service.png)
+
+3. Select the GitHub option and connect the application to the repository you created.
+
+    - ![GitHub Option](documentation/deployment/render_configure_github_account.png)
+
+4. Search for the repository you created and click "Connect."
+
+    - ![Connect to GitHub](documentation/deployment/render_connect_repository.png)
+
+    - ![Connect to GitHub](documentation/deployment/render_connect_repository_connect.png)
+
+5. Create name for the application
+
+    - ![Create Application Name](documentation/deployment/render_create_name.png)
+
+6. Select the region where you want to deploy the application.
+
+    - ![Select Region](documentation/deployment/render_select_region.png)
+
+7. Select branch to deploy.
+
+    - ![Select Branch](documentation/deployment/render_select_branch.png)
+
+8. Select environment.
+
+    - ![Select Environment Variables](documentation/deployment/render_select_environment.png)
+
+9. Render build command: `pip3 install -r requirements.txt && npm install`
+
+    - ![Render Build Command](documentation/deployment/render_build_command.png)
+
+10. Render start command: `node index.js`
+
+    - ![Render Start Command](documentation/deployment/render_start_command.png)
+
+11. Select Free plan.
+
+    - ![Select Free Plan](documentation/deployment/render_payment_info.png)
+
+12. Click on "Advanced" settings.
+
+    - ![Advanced Settings](documentation/deployment/render_advanced_settings.png)
+
+13. Add the following environment variables:
+
+    - Key: PORT Value: 8000
+    - Key: PYTHON_VERSION Value: 3.10.7
+
+    - ![Add Environment Variables](documentation/deployment/render_advanced_settings_variables.png)
+
+14. Click "Create Web Service."
+
+    - ![Save Web Service](documentation/deployment/render_create_web_service.png)
+
+15. Wait for the completion of the deployment.
+
 
 ## Credits
 - Terminal menu: [Simple Terminal Menu](https://pypi.org/project/simple-term-menu/).
