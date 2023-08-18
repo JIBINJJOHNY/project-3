@@ -40,7 +40,6 @@ class GameMenu:
         show_levels_menu method displays a submenu for selecting game
           levels and updates current_state
         """
-        heading = "Levels"
         sub_options = ["Easy", "Medium", "Hard", "Back"]
         sub_menu = TerminalMenu(sub_options)  # Create a submenu
         sub_menu_entry_index = sub_menu.show()  # Display the submenu
@@ -51,6 +50,7 @@ class GameMenu:
         show_instructions method displays the game instructions and
         provides options to return to the main menu.
         """
+        self.instruction_menu = TerminalMenu(["Back"])
         instructions = [
         "Slithering Challenge!",
         "",
@@ -61,7 +61,7 @@ class GameMenu:
         "4. The snake's length will increase with each collected food, making it both a reward and a challenge to manage.",
         "",
         "Game Elements:",
-        "- Snake: Control the snake's movement with the arrow keys. The snake's head is denoted by a '#', and the body by '='.",
+        "- Snake: Control the snake's movement with the arrow keys. The snake's head is denoted by a '#', and yellow color'.",
         "- Red Food: Collect the red food represented by '*'. Each collected food adds to your score and length.",
         "- Walls: The game area is bordered by walls. Colliding with them results in the loss of a life.",
         "- Lives: You start with three lives. Losing all lives will end the game.",
@@ -84,10 +84,11 @@ class GameMenu:
         "Enjoy the challenge and strive to top the leaderboard!"
     ]
 
-        print("\n".join(instructions))
+        back_menu = TerminalMenu(["Back"])
         while True:
-            user_input = input("Enter 0 Return to main menu: ")
-            if user_input == "0":
+            print("\n".join(instructions))
+            user_input = back_menu.show()
+            if user_input == 0:
                 self.show_menu()
                 break
 
