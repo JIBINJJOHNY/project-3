@@ -151,12 +151,12 @@ When the user select Leaderboard option ,the user will see message "Which levels
 - [curses](https://docs.python.org/3/library/curses.html?highlight=curses#module-curses ) was used for drawing the game window, handling user input, and displaying information on the screen
 - [random](https://docs.python.org/3/library/random.html) was used placing food items and obstacles at random positions in the game.
 - [time](https://docs.python.org/3/library/time.html?highlight=time#module-time) was used to control the speed of the game, manage delays, and calculate the time remaining in the game's timer.
-
+- [os](https://docs.python.org/3/library/os.html ) was used to clear the terminal before running the program.
 ##### Third-party imports:
 - [Simple Terminal Menu](https://pypi.org/project/simple-term-menu/) was used to implement the menu.
 - [gspread](https://docs.gspread.org/en/v5.10.0/) was used to  using to store and retrieve top scorers' information.
 - [google.oauth2.service_account](https://google-auth.readthedocs.io/en/master/reference/google.oauth2.service_account.html) was used to authenticate your application to access Google Sheets and Google Drive.
-
+- [Colorama](https://pypi.org/project/colorama/) was used to add colors and styles to the Game.
 #### Other tools:
 
 - [VSCode](https://code.visualstudio.com/) was used as the main tool to write and edit code.
