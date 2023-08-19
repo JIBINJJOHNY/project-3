@@ -1,3 +1,4 @@
+import os
 import curses
 from simple_term_menu import TerminalMenu
 import gspread
@@ -24,14 +25,14 @@ class GameMenu:
         self.GSPREAD_CLIENT = gspread.authorize(self.SCOPED_CREDS)
         self.SHEET = self.GSPREAD_CLIENT.open("slithering_challenge")
         self.current_state = None
-
+    
+  
     def show_menu(self):
         """
         show_menu method displays the main menu and
         stores the chosen menu option's index in current_state
 
         """
-    
         menu_entry_index = self.menu.show()
         self.current_state = menu_entry_index
 
@@ -215,6 +216,7 @@ def main():
     """
     The main function creates an instance of GameMenu and starts the game menu.
     """
+    os.system('cls' if os.name == 'nt' else 'clear')  # Clear the terminal screen
     game_menu = GameMenu()
     game_menu.start()
 
