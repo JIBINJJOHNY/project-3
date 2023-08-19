@@ -235,5 +235,3 @@ def main(stdscr):
 #  setting up and cleaning up the terminal environment correctly.
 if __name__ == "__main__":
     curses.wrapper(main)
-    print("\033[?25h")  # Show the cursor
-    curses.endwin()
