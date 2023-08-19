@@ -131,9 +131,9 @@ When the user select Leaderboard option ,the user will see message "Which levels
 
 - **When the user chose "Quit"**
 
-  The user will see a goodbye message, and the program will be stopped.
+  The user will see a thank you message, and the program will be stopped.
 
-  ![loading Program](documentation/features/goodbye_message.png)
+  ![loading Program](./documents/thankyou.png)
 
  ---
 ## Technologies Used
