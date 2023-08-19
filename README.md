@@ -2,11 +2,13 @@
 
 ![Responsive Mockup](./documents/responsive_mockup.png)
 
+*The link to [Slithering Challenge](https://slithering-challenge-89678e4c3aff.herokuapp.com/)*
 The "Slithering Challenge" is a multi-level snake game built using the Python programming language and the curses library for terminal-based graphics. The game provides an engaging and challenging experience for players as they control a snake to collect food, avoid obstacles, and compete for high scores.
 
 
 ## How to Play
 
+  1. Click this *[link](https://slithering-challenge-89678e4c3aff.herokuapp.com/)* or copy this text: `https://slithering-challenge-89678e4c3aff.herokuapp.com/` and paste it in your browser's address bar.
 Welcome to the Slithering Challenge! This multi-level snake game offers an engaging and competitive experience as you navigate your snake through various levels of difficulty. Collect food, avoid obstacles, and aim for high scores to prove your skills.
 
 + Objective:
@@ -31,6 +33,7 @@ Navigate your snake through the playing field, collect food to grow, and avoid o
     If you choose to save your score, enter your name using ASCII characters.
     Your score will be saved to the game's leaderboard, where you can compete against other players.
 
+ Link to the game: *https://slithering-challenge-89678e4c3aff.herokuapp.com/*
 ## User Stories
 ### As a player new to the game
 I want to understand the game's objective and controls quickly,So that I can start playing without any confusion.
@@ -55,6 +58,45 @@ I want to face different types of obstacles and changing snake speeds in each le
 
 I want to save my score to the leaderboard after completing a level,So that I can see how I rank against other players and strive to improve.
 
+## Features
+  
+  - **When the program is loaded**
+  The user will see a welcome message to the Slithering Challenge and four terminal options
+1. Start Game
+1. Instructions
+1. Leaderboard
+1. Quit
+
+  ![loading Program](./documents/mainmenu.png)
+The user can manipulate the terminal menu with the arrow keys to choose an option and the enter key to confirm the choice.
+- **When the user choose "Start Game"**
+
+The user will see the three-level sub terminal menus
+1. Easy
+1. Medium 
+1. Hard 
+
+![loading Program](./documents/levelmenu.png)
+
+ - **When the user choose "Easy level"**
+
+![loading Program](./documents/easygame.png)
+1. Simple Gameplay: The "Easy" level offers a straightforward gameplay experience, perfect for beginners to get accustomed to controlling the yellow snake and collecting red food items.
+1. Growth Mechanic: Each collected food item increases both your score and the length of your snake, making the game progressively more challenging.
+1. Safe Learning Environment: The game environment is designed to provide a safe space for players to learn the basics of movement and collection without overwhelming challenges.
+1. Intuitive Controls: The arrow keys provide intuitive control over the snake's movement, making it accessible to players of all ages.
+
+ - **When the user choose "Medium level"**
+ ![loading Program](./documents/mediumgame.png)
+ The "Medium" level introduces green obstacles, offering a balanced challenge suitable for players with some gaming experience.
+1. Dynamic Gameplay: As you collect redfood items, your yellow snake grows longer, and its speed increases, requiring more precise control and decision-making.
+1. Strategic exploration: Navigate through the maze while carefully planning your movements to avoid collisions when the user hits a boundary, obstacle or the snake itself.
+1. Rewarding Progression: Watch your score and snake length grow as you successfully collect food items, giving you a sense of accomplishment.
+ - **When the user choose "Hard level"**
+![loading Program](./documents/hardgame.png)
+The 'Hard' level offers a relentless challenge with complex mazes and challenging green obstacles designed to push your skills to the limit.Level introduces timer 2 min and snake speed
+1. Strategic Precision: Every move matters; carefully plan each maneuver to maximize your score and minimize the risk of collision.
+1. Masterful Navigation: Expertly navigate tight corners and narrow passages to collect food items without compromising your snake's safety.
 
 ## Technologies Used
 
