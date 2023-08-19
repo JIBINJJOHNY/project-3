@@ -31,7 +31,7 @@ class GameMenu:
         stores the chosen menu option's index in current_state
 
         """
-        print("Welcome to Slithering Challenge\n")  # Heading
+    
         menu_entry_index = self.menu.show()
         self.current_state = menu_entry_index
 
@@ -206,6 +206,7 @@ class GameMenu:
         """
         The start method initializes the main menu and begins the game loop.
         """
+        print("Welcome to Slithering Challenge\n")  # Heading
         self.show_menu()
         self.start_game()
 
