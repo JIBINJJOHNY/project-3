@@ -140,7 +140,7 @@ class GameMenu:
             for rank, entry in enumerate(sorted_level_data, start=1):
                 name, score = entry
                 print(f"{rank}. {name}: {score}")
-
+    
         except Exception as e:
             print("Error fetching or displaying leaderboard data:", str(e))
 
@@ -174,6 +174,7 @@ class GameMenu:
                 self.show_leaderboard()
 
             elif self.current_state == 3:
+                print("Thank you for playing Slithering Challenge! See you soon!")
                 break  # Quit the game
 
     def start_snake_game(self, game_function):

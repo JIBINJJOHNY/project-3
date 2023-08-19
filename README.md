@@ -71,10 +71,11 @@ I want to save my score to the leaderboard after completing a level,So that I ca
 The user can manipulate the terminal menu with the arrow keys to choose an option and the enter key to confirm the choice.
 - **When the user choose "Start Game"**
 
-The user will see the three-level sub terminal menus
+The user will see the four-level sub terminal menus
 1. Easy
 1. Medium 
 1. Hard 
+1. Back
 
 ![loading Program](./documents/levelmenu.png)
 
@@ -98,8 +99,44 @@ The 'Hard' level offers a relentless challenge with complex mazes and challengin
 1. Strategic Precision: Every move matters; carefully plan each maneuver to maximize your score and minimize the risk of collision.
 1. Masterful Navigation: Expertly navigate tight corners and narrow passages to collect food items without compromising your snake's safety.
 
-## Technologies Used
+When the user loses the game, the game over message and final score are displayed.
+![loading Program](./documents/gameover.png)
+Then comes "Do you want to save your message?" with Yes and No options.
+![loading Program](./documents/scoresve.png)
+If the user selects the "Yes" option, the user will be redirected to "Enter your name".
+![loading Program](./documents/entername.png)
+You will then be redirected to the top 10 scores for each level. The current user within this list will be highlighted.
+![loading Program](./documents/topten.png)
 
+If user select No redirect to levels terminal menu
+- **When the user choose "Instructions from main menu"**
+When the user selects the Instructions option, the user can read instructions about the game and there is a single terminal menu for "back" to the main menu.
+![loading Program](./documents/instructions.png)
+- **When the user choose "Leaderboard from main menu"**
+When the user select Leaderboard option ,the user will see message "Which levels's leaderboard do you want to see? with the four sub terminal menu.
+1. Easy
+1. Medium
+1. Hard
+1. Back
+![loading Program](./documents/leaderboard.png)
+ - **When the user choose "Easy"**
+ User can see easy level score board.
+![loading Program](./documents/leaderboardeasy.png)
+ - **When the user choose "Medium"**
+ User can see medium level score board.
+ ![loading Program](./documents/leaderboardmedium.png)
+  - **When the user choose "Hard"**
+ User can see Hard level score board.
+ ![loading Program](./documents/leaderboardhard.png)
+
+- **When the user chose "Quit"**
+
+  The user will see a goodbye message, and the program will be stopped.
+
+  ![loading Program](documentation/features/goodbye_message.png)
+
+ ---
+## Technologies Used
 ### Languages:
 - [Python 3.8.5](https://www.python.org/downloads/release/python-385/): utilized as a project base and to guide the entire application behaviour.
 ### Frameworks/Libraries, Programmes and Tools:
