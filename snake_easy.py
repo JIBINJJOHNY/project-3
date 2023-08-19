@@ -1,7 +1,7 @@
 import curses
 from random import randint
 from time import sleep
-from colorama import init, Fore, Back, Style 
+from colorama import init, Fore, Back, Style
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -13,21 +13,23 @@ def main(stdscr):
     the snake's position, food position, score, and lives
     """
     stdscr.clear()
-    init(autoreset=True) 
+    init(autoreset=True)
     curses.start_color()  # Initialize color pairs in curses
     curses.init_pair(1, curses.COLOR_YELLOW, curses.COLOR_BLACK)  # Snake color
     curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)  # Food color
     sh = 20
     sw = 60
-   
     win = curses.newwin(sh + 1, sw + 1, 0, 0)
     win.keypad(1)
     curses.noecho()
-    #curses.curs_set(0)
     win.border(0)
     win.nodelay(1)
 
-    snake = [(sh // 2, sw // 2), (sh // 2, sw // 2 - 1), (sh // 2, sw // 2 - 2)]
+    snake = [
+        (sh // 2, sw // 2),
+        (sh // 2, sw // 2 - 1),
+        (sh // 2, sw // 2 - 2)
+        ]
     food = ()
     ESC = 27
     key = curses.KEY_RIGHT
@@ -97,7 +99,9 @@ def main(stdscr):
                 )
                 if food not in snake:
                     break
-            win.addch(food[0], food[1], "*", curses.A_BOLD | curses.color_pair(2))  # Display the food
+            win.addch(
+                food[0], food[1], "*", curses.A_BOLD | curses.color_pair(2)
+                )  # Display the food
         # Check if snake has eaten the food
         elif snake[0] == food:
             score += 1
@@ -106,7 +110,9 @@ def main(stdscr):
             last = snake.pop()
             win.addch(last[0], last[1], " ")  # Clear the tail position
 
-        win.addch(snake[0][0], snake[0][1], "#", curses.A_BOLD | curses.color_pair(1))  # Display the snake's head
+        win.addch(
+            snake[0][0], snake[0][1], "#", curses.A_BOLD | curses.color_pair(1)
+            )  # Display the snake's head
 
     # Clear the window before displaying the game over message
     win.clear()
@@ -125,7 +131,8 @@ def main(stdscr):
 
     # Display the save score prompt and options
     win.addstr(
-        sh // 2 - 2, sw // 2 - 15, "Do you want to save your score?", curses.A_BOLD
+        sh // 2 - 2, sw // 2 - 15,
+        "Do you want to save your score?", curses.A_BOLD
     )
     win.addstr(sh // 2, sw // 2 - 6, "Yes", curses.A_BOLD)
     win.addstr(sh // 2, sw // 2 + 1, "No", curses.A_BOLD)
@@ -176,10 +183,13 @@ def main(stdscr):
         easy = SHEET.worksheet("easy")
         easy.append_row([name, score])
         top_scorers = easy.get_all_values()[1:]
-        sorted_top_scorers = sorted(top_scorers, key=lambda x: int(x[1]), reverse=True)
+        sorted_top_scorers = sorted(
+                top_scorers, key=lambda x: int(x[1]), reverse=True)
     except Exception as e:
         # Handle any errors that might occur during the API call
-        win.addstr(sh // 2, sw // 2 - 15, "Error fetching top scorers.", curses.A_BOLD)
+        win.addstr(
+            sh // 2, sw // 2 - 15,
+            "Error fetching top scorers.", curses.A_BOLD)
         win.addstr(sh // 2 + 1, sw // 2 - 15, str(e))
         win.refresh()
     # Display the top 10 scorers list
@@ -194,7 +204,8 @@ def main(stdscr):
             if name == current_user_name and int(s) == score:
                 # Highlight the current user's entry
                 win.addstr(
-                    sh // 2 - 5 + i, sw // 2 - 15, position_str, curses.A_STANDOUT
+                    sh // 2 - 5 + i, sw // 2 - 15,
+                    position_str, curses.A_STANDOUT
                 )
                 current_user_highlighted = True
             else:
@@ -224,3 +235,5 @@ def main(stdscr):
 #  setting up and cleaning up the terminal environment correctly.
 if __name__ == "__main__":
     curses.wrapper(main)
+    print("\033[?25h")  # Show the cursor
+    curses.endwin()

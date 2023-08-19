@@ -98,6 +98,8 @@ The user will see the four-level sub terminal menus
 The 'Hard' level offers a relentless challenge with complex mazes and challenging green obstacles designed to push your skills to the limit.Level introduces timer 2 min and snake speed
 1. Strategic Precision: Every move matters; carefully plan each maneuver to maximize your score and minimize the risk of collision.
 1. Masterful Navigation: Expertly navigate tight corners and narrow passages to collect food items without compromising your snake's safety.
+  - **When the user choose "Back"**
+  user will redirect to main menu
 
 When the user loses the game, the game over message and final score are displayed.
 ![loading Program](./documents/gameover.png)
@@ -128,8 +130,9 @@ When the user select Leaderboard option ,the user will see message "Which levels
   - **When the user choose "Hard"**
  User can see Hard level score board.
  ![loading Program](./documents/leaderboardhard.png)
-
-- **When the user chose "Quit"**
+  - **When the user choose "Back"**
+  user will redirect to main menu
+- **When the user choose "Quit"**
 
   The user will see a thank you message, and the program will be stopped.
 

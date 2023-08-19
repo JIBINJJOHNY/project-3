@@ -4,6 +4,28 @@ Return back to the [README.md](README.md) file.
 
 The Game was tested constantly during its development process.
 Other users also tested the games to improve new ideas.
+
+---
+### Validators
+
+CI Python Linter [online validation tool](https://pep8ci.herokuapp.com/) was used to ensure that all of the project's Python source code is [Pep 8-compliant](https://legacy.python.org/dev/peps/pep-0008/). This checking was done manually by copying python code and pasting it into the validator.
+
+No errors were found:
+
+
+- **run.py**
+
+![Python Validator](./documents/run_validation.png)
+
+- **snake_easy.py**
+
+![Python Validator](./documents/easy_validation.png)
+- **snake_medium.py**
+
+![Python Validator](./documents/medium_validation.png)
+- **snake_hard.py**
+
+![Python Validator](./documents/hard_validation.png)
 ## Bugs
 
 + **Solved bugs**
@@ -53,6 +75,7 @@ Other users also tested the games to improve new ideas.
             sh // 2 - 5 + i + 1, sw // 2 - 15, position_str, curses.A_STANDOUT
         )
   ```
+
 + **Unsolved bugs**
 - I try to adds a mechanism to periodically generate new obstacles in the game but it was not worked.
 ```python
@@ -66,4 +89,4 @@ Other users also tested the games to improve new ideas.
                 (random.randint(1, sh - 1), random.randint(1, sw - 1)),
             ]
   ```
--
+---

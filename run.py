@@ -25,11 +25,10 @@ class GameMenu:
         self.GSPREAD_CLIENT = gspread.authorize(self.SCOPED_CREDS)
         self.SHEET = self.GSPREAD_CLIENT.open("slithering_challenge")
         self.current_state = None
-    
-  
+
     def show_menu(self):
         """
-        show_menu method displays the main menu and
+        Show_menu method displays the main menu and
         stores the chosen menu option's index in current_state
 
         """
@@ -38,53 +37,64 @@ class GameMenu:
 
     def show_levels_menu(self):
         """
-        show_levels_menu method displays a submenu for selecting game
-          levels and updates current_state
+        Show_levels_menu method displays a submenu for selecting game
+        levels and updates current_state
         """
         sub_options = ["Easy", "Medium", "Hard", "Back"]
-        sub_menu = TerminalMenu(sub_options, title="LEVELS")  
+        sub_menu = TerminalMenu(sub_options, title="LEVELS")
         sub_menu_entry_index = sub_menu.show()  # Display the submenu
         self.current_state = sub_menu_entry_index
 
     def show_instructions(self):
         """
-        show_instructions method displays the game instructions and
+        Show_instructions method displays the game instructions and
         provides options to return to the main menu.
         """
         self.instruction_menu = TerminalMenu(["Back"])
         instructions = [
-        "Slithering Challenge!",
-        "",
-        "How to Play:",
-        "1. Use the arrow keys (Up, Down, Left, Right)to control the snake's movement.",
-        "2. Your goal is to collect the red food items to increase your score and grow your snake's length.",
-        "3. Be cautious not to run into the walls or collide with your own body, as this will cost you a life.",
-        "4. The snake's length will increase with each collected food, making it both a reward and a challenge to manage.",
-        "",
-        "Game Elements:",
-        "- Snake: Control the snake's movement with the arrow keys. The snake's head is denoted by a '#', and yellow color'.",
-        "- Red Food: Collect the red food represented by '*'. Each collected food adds to your score and length.",
-        "- Walls: The game area is bordered by walls. Colliding with them results in the loss of a life.",
-        "- Lives: You start with three lives. Losing all lives will end the game.",
-        "- Pause: Press 'Esc' at any time to pause the game and catch your breath. Resume by pressing any key.",
-        "",
-        "Scoring:",
-        "- Each collected food adds one point to your score.",
-        "- The longer your snake, the faster it moves, adding a strategic challenge to the game.",
-        "",
-        "After the Game:",
-        "- Once you run out of lives, the game ends, and you'll be presented with options.",
-        "- Press 'Yes' to save your score and see the leaderboard, competing with others for the top spot.",
-        "- Press 'No' to return to the level selection screen.",
-        "- Press '0' to go back to the main menu and explore other game options.",
-        "",
-        "Tips:",
-        "- Plan your movements carefully to avoid collisions with walls and your snake's body.",
-        "- Keep an eye on the snake's length; a longer snake requires more precise maneuvers.",
-        "",
-        "Enjoy the challenge and strive to top the leaderboard!"
-    ]
-
+            "Slithering Challenge!",
+            "",
+            "How to Play:",
+            "1. Use the arrow keys(Up, Down, Left, Right)to control the snake",
+            "2. Your goal is to collect the red food items to increase your.",
+            "3. Be cautious avoid walls or collide with your own body,",
+            "   as this will cost you a life.",
+            "4. The snake's length will increase with each collected food,",
+            "   making it both a reward and a challenge to manage.",
+            "",
+            "Game Elements:",
+            "- Snake: Control the snake's movement with the arrow keys.",
+            "         The snake's head is denoted by a '#',and yellow color'.",
+            "- Red Food: Collect the red food represented by '*'.",
+            "            Each collected food adds to your score and length.",
+            "- Walls: The game area is bordered by walls.",
+            "         Colliding with them results in the loss of a life.",
+            "- obstacles: Medium and Hard levels contain obstacles.",
+            "- Lives: You start with three lives.",
+            "         Losing all lives will end the game.",
+            "- Pause: Press 'Esc' at any time to pause the game",
+            "         Resume by pressing any key.",
+            "",
+            "Scoring:",
+            "- Each collected food adds one point to your score.",
+            "- The longer your snake, the faster it moves,",
+            "  adding a strategic challenge to the game.",
+            "",
+            "After the Game:",
+            "- Once you run out of lives, the game ends,",
+            "  and you'll be presented with options.",
+            "- Press 'Yes' to save your score and see the leaderboard,",
+            "  competing with others for the top spot.",
+            "- Press 'No' to return to the level selection screen.",
+            "",
+            "Tips:",
+            "- Plan your movements carefully to avoid collisions with walls",
+            "  and your snake's body.",
+            "- Keep an eye on the snake's length;",
+            "  a longer snake requires more precise maneuvers.",
+            "",
+            "Enjoy the challenge and strive to top the leaderboard!"
+        ]
         back_menu = TerminalMenu(["Back"])
         while True:
             print("\n".join(instructions))
@@ -99,7 +109,9 @@ class GameMenu:
         leaderboard level.
         """
         sub_options = ["Easy", "Medium", "Hard", "Back"]
-        sub_menu = TerminalMenu(sub_options, title="Which level's leaderboard do you want to see?")  
+        sub_menu = TerminalMenu(
+            sub_options, title="Which level's leaderboard do you want to see?"
+            )
         sub_menu_entry_index = sub_menu.show()  # Display the submenu
         return sub_menu_entry_index
 
@@ -140,7 +152,6 @@ class GameMenu:
             for rank, entry in enumerate(sorted_level_data, start=1):
                 name, score = entry
                 print(f"{rank}. {name}: {score}")
-    
         except Exception as e:
             print("Error fetching or displaying leaderboard data:", str(e))
 
@@ -160,7 +171,6 @@ class GameMenu:
                 elif self.current_state == 1:
                     self.start_medium_level()
 
-
                 elif self.current_state == 2:
                     self.start_hard_level()
 
@@ -174,7 +184,7 @@ class GameMenu:
                 self.show_leaderboard()
 
             elif self.current_state == 3:
-                print("Thank you for playing Slithering Challenge! See you soon!")
+                print("Thank you for playing! See you soon!")
                 break  # Quit the game
 
     def start_snake_game(self, game_function):
@@ -204,6 +214,7 @@ class GameMenu:
         """
         self.start_snake_game(snake_hard_main)
         self.show_levels_menu()
+
     def start(self):
         """
         The start method initializes the main menu and begins the game loop.
@@ -217,9 +228,10 @@ def main():
     """
     The main function creates an instance of GameMenu and starts the game menu.
     """
-    os.system('cls' if os.name == 'nt' else 'clear')  # Clear the terminal screen
+    os.system('cls' if os.name == 'nt' else 'clear')  # Clear the terminal
     game_menu = GameMenu()
     game_menu.start()
+
 
 if __name__ == "__main__":
     main()

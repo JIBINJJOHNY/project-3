@@ -5,28 +5,35 @@ import gspread
 from google.oauth2.service_account import Credentials
 from colorama import init, Fore, Back, Style
 
+
 def main(stdscr):
     """
     main function that controls the game.
     It receives a stdscr object which represents the game screen.
     """
-    
+
     stdscr.clear()
     init(autoreset=True)  # Initialize Colorama
     curses.start_color()  # Initialize color pairs in curses
-    curses.init_pair(1, curses.COLOR_YELLOW, curses.COLOR_BLACK)  # Snake color
-    curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)  # Food color
-    curses.init_pair(3, curses.COLOR_GREEN, curses.COLOR_BLACK)  # Obstacle color
+    curses.init_pair(
+        1, curses.COLOR_YELLOW, curses.COLOR_BLACK)  # Snake color
+    curses.init_pair(
+        2, curses.COLOR_RED, curses.COLOR_BLACK)  # Food color
+    curses.init_pair(
+        3, curses.COLOR_GREEN, curses.COLOR_BLACK)  # Obstacle color
     sh = 20
     sw = 60
 
     win = curses.newwin(sh + 1, sw + 1, 0, 0)
     win.keypad(1)
     curses.noecho()
-    #curses.curs_set(0)
     win.border(0)
     win.nodelay(1)
-    snake = [(sh // 2, sw // 2), (sh // 2, sw // 2 - 1), (sh // 2, sw // 2 - 2)]
+    snake = [
+        (sh // 2, sw // 2),
+        (sh // 2, sw // 2 - 1),
+        (sh // 2, sw // 2 - 2)
+        ]
     food = ()
     obstacles = [
         (sh // 2 - 3, sw // 2),
@@ -101,7 +108,9 @@ def main(stdscr):
                 )
                 if food not in snake and food not in obstacles:
                     break
-            win.addch(food[0], food[1], "*",curses.A_BOLD | curses.color_pair(2))
+            win.addch(
+                food[0], food[1], "*", curses.A_BOLD | curses.color_pair(2)
+                )
         elif snake[0] == food:
             score += 1
             food = ()
@@ -110,9 +119,11 @@ def main(stdscr):
             win.addch(last[0], last[1], " ")
 
         for obstacle in obstacles:
-            win.addch(obstacle[0], obstacle[1], "X", curses.A_BOLD | curses.color_pair(3))
+            win.addch(obstacle[0], obstacle[1], "X",
+                      curses.A_BOLD | curses.color_pair(3))
 
-        win.addch(snake[0][0], snake[0][1], "#", curses.A_BOLD | curses.color_pair(1))
+        win.addch(snake[0][0], snake[0][1], "#",
+                  curses.A_BOLD | curses.color_pair(1))
 
     # Clear the window before displaying the game over message
     win.clear()
@@ -131,8 +142,8 @@ def main(stdscr):
 
     # Display the save score prompt and options
     win.addstr(
-        sh // 2 - 2, sw // 2 - 15, "Do you want to save your score?", curses.A_BOLD
-    )
+        sh // 2 - 2, sw // 2 - 15,
+        "Do you want to save your score?", curses.A_BOLD)
     win.addstr(sh // 2, sw // 2 - 6, "Yes", curses.A_BOLD)
     win.addstr(sh // 2, sw // 2 + 1, "No", curses.A_BOLD)
     win.refresh()
@@ -180,10 +191,13 @@ def main(stdscr):
         medium = SHEET.worksheet("medium")
         medium.append_row([name, score])
         top_scorers = medium.get_all_values()[1:]
-        sorted_top_scorers = sorted(top_scorers, key=lambda x: int(x[1]), reverse=True)
+        sorted_top_scorers = sorted(
+            top_scorers, key=lambda x: int(x[1]), reverse=True)
     except Exception as e:
         # Handle any errors that might occur during the API call
-        win.addstr(sh // 2, sw // 2 - 15, "Error fetching top scorers.", curses.A_BOLD)
+        win.addstr(
+            sh // 2, sw // 2 - 15,
+            "Error fetching top scorers.", curses.A_BOLD)
         win.addstr(sh // 2 + 1, sw // 2 - 15, str(e))
         win.refresh()
 
@@ -198,16 +212,19 @@ def main(stdscr):
             if name == current_user_name and int(s) == score:
                 # Highlight the current user's entry
                 win.addstr(
-                    sh // 2 - 5 + i, sw // 2 - 15, position_str, curses.A_STANDOUT
+                    sh // 2 - 5 + i, sw // 2 - 15,
+                    position_str, curses.A_STANDOUT
                 )
                 current_user_highlighted = True
             else:
                 win.addstr(sh // 2 - 5 + i, sw // 2 - 15, position_str)
         if not current_user_highlighted and len(sorted_top_scorers) < 10:
             i += 1
-            #highlight name and score
+            # highlight name and score
             position_str = f"{i}. {current_user_name}: {score}"
-            win.addstr(sh // 2 - 5 + i, sw // 2 - 15, position_str, curses.A_STANDOUT)
+            win.addstr(
+                sh // 2 - 5 + i, sw // 2 - 15,
+                position_str, curses.A_STANDOUT)
         win.refresh()
         win.getch()
         # Add a delay to allow the user more time to view the content
@@ -215,7 +232,11 @@ def main(stdscr):
     except Exception as e:
         # Handle any errors that might occur during the API call
         win.clear()
-        win.addstr(sh // 2, sw // 2 - 15, "Error fetching top scorers.", curses.A_BOLD)
+        win.addstr(
+            sh // 2, sw // 2 - 15,
+            "Error fetching top scorers.",
+            curses.A_BOLD
+            )
         win.addstr(sh // 2 + 1, sw // 2 - 15, str(e))
         win.refresh()
 
