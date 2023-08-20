@@ -34,6 +34,8 @@ Navigate your snake through the playing field, collect food to grow, and avoid o
     Your score will be saved to the game's leaderboard, where you can compete against other players.
 
  Link to the game: *https://slithering-challenge-89678e4c3aff.herokuapp.com/*
+
+ ---
 ## User Stories
 ### As a player new to the game
 I want to understand the game's objective and controls quickly,So that I can start playing without any confusion.
@@ -58,6 +60,7 @@ I want to face different types of obstacles and changing snake speeds in each le
 
 I want to save my score to the leaderboard after completing a level,So that I can see how I rank against other players and strive to improve.
 
+---
 ## Features
   
   - **When the program is loaded**
@@ -263,6 +266,7 @@ Please refer to the [TESTING.md](TESTING.md) file for all test related documenta
 
       - ![View Button](./documents/view_app.png)
 
+---
 
 ## Credits
 - Terminal menu: [Simple Terminal Menu](https://pypi.org/project/simple-term-menu/).
@@ -270,6 +274,7 @@ Please refer to the [TESTING.md](TESTING.md) file for all test related documenta
 - Inspiration of snake game [Iuliia Konovalova](https://github.com/IuliiaKonovalova) on GitHub.
 - Inspiration of snake game [Mision Codigo](https://www.youtube.com/@MisionCodigo/videos) on his YouTube channel.
 
+---
 ## Acknowledgements
 - [Iuliia Konovalova](https://github.com/IuliiaKonovalova) my mentor has been a great supporter, guiding me through the development of the project and helping me to learn a lot of new things by challenging me to do something new.
 - [Code Institute](https://codeinstitute.net/de/)  tutors and Slack community members for their support and help.
