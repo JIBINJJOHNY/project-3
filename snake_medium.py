@@ -7,22 +7,18 @@ from google.oauth2.service_account import Credentials
 
 # Define global variables for screen height and width
 sh = 20
-sw = 6
-
-
+sw = 60
 def reset_snake_position(snake, win):
-    """
-    Clear the previous snake body cells and reset
-    the snake's position to the base position
-    """
-    for y, x in snake:
-        win.addch(y, x, " ")
+        """
+        Clear the previous snake body cells and reset
+        the snake's position to the base position
+        """
+        for y, x in snake:
+            win.addch(y, x, " ")
     # Reset the snake's position to the base position
         base_y, base_x = sh // 2, sw // 2
         for i, (y, x) in enumerate(snake):
             snake[i] = (base_y, base_x - i)
-
-
 def main(stdscr):
     """
     main function that controls the game.
@@ -263,3 +259,4 @@ def main(stdscr):
 
 if __name__ == "__main__":
     curses.wrapper(main)
+    
