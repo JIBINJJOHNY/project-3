@@ -5,6 +5,23 @@ from colorama import init, Fore, Back, Style
 import gspread
 from google.oauth2.service_account import Credentials
 
+# Define global variables for screen height and width
+sh = 20
+sw = 6
+
+
+def reset_snake_position(snake, win):
+    """
+    Clear the previous snake body cells and reset
+    the snake's position to the base position
+    """
+    for y, x in snake:
+        win.addch(y, x, " ")
+    # Reset the snake's position to the base position
+        base_y, base_x = sh // 2, sw // 2
+        for i, (y, x) in enumerate(snake):
+            snake[i] = (base_y, base_x - i)
+
 
 def main(stdscr):
     """
@@ -21,8 +38,6 @@ def main(stdscr):
         2, curses.COLOR_RED, curses.COLOR_BLACK)  # Food color
     curses.init_pair(
         3, curses.COLOR_GREEN, curses.COLOR_BLACK)  # Obstacle color
-    sh = 20
-    sw = 60
 
     win = curses.newwin(sh + 1, sw + 1, 0, 0)
     win.keypad(1)
@@ -48,17 +63,6 @@ def main(stdscr):
     score = 0
     lives = 3
 
-    def reset_snake_position(snake, win):
-        """
-        Clear the previous snake body cells and reset
-        the snake's position to the base position
-        """
-        for y, x in snake:
-            win.addch(y, x, " ")
-    # Reset the snake's position to the base position
-        base_y, base_x = sh // 2, sw // 2
-        for i, (y, x) in enumerate(snake):
-            snake[i] = (base_y, base_x - i)
     while key != ESC and lives > 0:
         # Display the game information
         win.addnstr(0, 2, "Score: " + str(score) + " ", 20)
@@ -160,8 +164,8 @@ def main(stdscr):
     win.addstr(
         sh // 2 - 2, sw // 2 - 15,
         "Do you want to save your score?", curses.A_BOLD)
-    win.addstr(sh // 2, sw // 2 - 6, "Yes", curses.A_BOLD)
-    win.addstr(sh // 2, sw // 2 + 1, "No", curses.A_BOLD)
+    win.addstr(sh // 2, sw // 2 - 8, "click Y", curses.A_BOLD)
+    win.addstr(sh // 2, sw // 2 + 4, "click N", curses.A_BOLD)
     win.refresh()
 
     # Get user input for saving score
@@ -259,4 +263,3 @@ def main(stdscr):
 
 if __name__ == "__main__":
     curses.wrapper(main)
-    

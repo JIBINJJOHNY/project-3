@@ -5,6 +5,10 @@ import gspread
 from google.oauth2.service_account import Credentials
 from colorama import init, Fore, Back, Style
 
+# Define global variables for screen height and width
+sh = 20
+sw = 60
+
 
 def generate_obstacles(screen_height, screen_width, num_obstacles):
     """
@@ -24,6 +28,19 @@ def generate_obstacles(screen_height, screen_width, num_obstacles):
     return obstacles
 
 
+def reset_snake_position(snake, win):
+    """
+    Clear the previous snake body cells and reset
+    the snake's position to the base position
+    """
+    for y, x in snake:
+        win.addch(y, x, " ")
+    # Reset the snake's position to the base position
+        base_y, base_x = sh // 2, sw // 2
+        for i, (y, x) in enumerate(snake):
+            snake[i] = (base_y, base_x - i)
+
+
 def main(stdscr):
     """
     The main function is the entry point of the program.
@@ -39,14 +56,11 @@ def main(stdscr):
     curses.init_pair(
         3, curses.COLOR_GREEN, curses.COLOR_BLACK)  # Obstacle color
 
-    sh = 20
-    sw = 60
     num_obstacles = 10  # Adjust the number of obstacles as needed
 
     win = curses.newwin(sh + 1, sw + 1, 0, 0)
     win.keypad(1)
     curses.noecho()
-    curses.curs_set(0)
     win.border(0)
     win.nodelay(1)
 
@@ -66,17 +80,6 @@ def main(stdscr):
     timer_start = time()  # Timer start time
     timer_duration = 120  # 2 minutes in seconds
 
-    def reset_snake_position(snake, win):
-        """
-        Clear the previous snake body cells and reset
-        the snake's position to the base position
-        """
-        for y, x in snake:
-            win.addch(y, x, " ")
-    # Reset the snake's position to the base position
-        base_y, base_x = sh // 2, sw // 2
-        for i, (y, x) in enumerate(snake):
-            snake[i] = (base_y, base_x - i)
     while key != ESC and lives > 0:
         # Calculate the time remaining on the timer
         time_remaining = timer_duration - (time() - timer_start)
