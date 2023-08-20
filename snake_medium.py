@@ -1,9 +1,9 @@
 import curses
 from random import randint
 from time import sleep
+from colorama import init, Fore, Back, Style
 import gspread
 from google.oauth2.service_account import Credentials
-from colorama import init, Fore, Back, Style
 
 
 def main(stdscr):
@@ -39,6 +39,7 @@ def main(stdscr):
         (sh // 2 - 3, sw // 2),
         (sh // 2 + 3, sw // 2),
         (sh // 2, sw // 2 - 10),
+        (sh // 2 + 8, sw // 2 - 15),
     ]
     ESC = 27
     key = curses.KEY_RIGHT
@@ -47,10 +48,22 @@ def main(stdscr):
     score = 0
     lives = 3
 
+    def reset_snake_position(snake, win):
+        """
+        Clear the previous snake body cells and reset
+        the snake's position to the base position
+        """
+        for y, x in snake:
+            win.addch(y, x, " ")
+    # Reset the snake's position to the base position
+        base_y, base_x = sh // 2, sw // 2
+        for i, (y, x) in enumerate(snake):
+            snake[i] = (base_y, base_x - i)
     while key != ESC and lives > 0:
+        # Display the game information
         win.addnstr(0, 2, "Score: " + str(score) + " ", 20)
         win.addnstr(0, sw - 10, "Lives: " + str(lives) + " ", 20)
-        win.timeout(150 - (len(snake)) // 5 + len(snake) // 10 % 120)
+        win.timeout(150 - (len(snake)) // 5 + len(snake) // 20 % 120)
         event = win.getch()
 
         if event != -1:
@@ -82,6 +95,7 @@ def main(stdscr):
                 break
             else:
                 sleep(1)
+                reset_snake_position(snake, win)
                 continue
 
         if (y, x) in snake[1:]:
@@ -90,6 +104,7 @@ def main(stdscr):
                 break
             else:
                 sleep(1)
+                reset_snake_position(snake, win)
                 continue
         if (y, x) in obstacles:
             lives -= 1
@@ -97,6 +112,7 @@ def main(stdscr):
                 break
             else:
                 sleep(1)
+                reset_snake_position(snake, win)
                 continue
         snake.insert(0, (y, x))
 
@@ -243,3 +259,4 @@ def main(stdscr):
 
 if __name__ == "__main__":
     curses.wrapper(main)
+    

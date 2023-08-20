@@ -37,7 +37,18 @@ def main(stdscr):
 
     score = 0
     lives = 3
-
+    
+    def reset_snake_position(snake, win):
+        """
+        Clear the previous snake body cells and reset
+        the snake's position to the base position
+        """
+        for y, x in snake:
+            win.addch(y, x, " ")
+    # Reset the snake's position to the base position
+        base_y, base_x = sh // 2, sw // 2
+        for i, (y, x) in enumerate(snake):
+            snake[i] = (base_y, base_x - i)
     while key != ESC and lives > 0:
         # Display the score and lives on the screen
         win.addnstr(0, 2, "Score: " + str(score) + " ", 20)
@@ -87,6 +98,7 @@ def main(stdscr):
             else:
                 # Pause briefly before continuing
                 sleep(1)
+                reset_snake_position(snake, win)
                 continue
         # Move the snake forward
         snake.insert(0, (y, x))

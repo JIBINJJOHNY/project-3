@@ -6,6 +6,24 @@ from google.oauth2.service_account import Credentials
 from colorama import init, Fore, Back, Style
 
 
+def generate_obstacles(screen_height, screen_width, num_obstacles):
+    """
+    Generate random obstacle positions that avoid the
+    borders of the screen.
+    """
+    obstacles = []
+    for _ in range(num_obstacles):
+        while True:
+            obstacle = (
+                randint(1, screen_height - 1),
+                randint(1, screen_width - 1),
+            )
+            if obstacle not in obstacles:
+                obstacles.append(obstacle)
+                break
+    return obstacles
+
+
 def main(stdscr):
     """
     The main function is the entry point of the program.
@@ -23,28 +41,22 @@ def main(stdscr):
 
     sh = 20
     sw = 60
+    num_obstacles = 10  # Adjust the number of obstacles as needed
 
     win = curses.newwin(sh + 1, sw + 1, 0, 0)
     win.keypad(1)
     curses.noecho()
+    curses.curs_set(0)
     win.border(0)
     win.nodelay(1)
 
+    obstacles = generate_obstacles(sh, sw, num_obstacles)  # Generate obstacles
     snake = [
         (sh // 2, sw // 2),
         (sh // 2, sw // 2 - 1),
         (sh // 2, sw // 2 - 2)
         ]
     food = ()
-    obstacles = [
-        (sh // 2 - 3, sw // 2),
-        (sh // 2 + 3, sw // 2),
-        (sh // 2, sw // 2 - 10),
-        (sh // 2 - 5, sw // 2 + 5),
-        (sh // 2 + 5, sw // 2 - 7),
-        (sh // 2 + 6, sw // 2 - 12),
-        (sh // 2 + 8, sw // 2 - 15),
-    ]
     ESC = 27
     key = curses.KEY_RIGHT
     prev_key = key
@@ -54,6 +66,17 @@ def main(stdscr):
     timer_start = time()  # Timer start time
     timer_duration = 120  # 2 minutes in seconds
 
+    def reset_snake_position(snake, win):
+        """
+        Clear the previous snake body cells and reset
+        the snake's position to the base position
+        """
+        for y, x in snake:
+            win.addch(y, x, " ")
+    # Reset the snake's position to the base position
+        base_y, base_x = sh // 2, sw // 2
+        for i, (y, x) in enumerate(snake):
+            snake[i] = (base_y, base_x - i)
     while key != ESC and lives > 0:
         # Calculate the time remaining on the timer
         time_remaining = timer_duration - (time() - timer_start)
@@ -101,6 +124,7 @@ def main(stdscr):
                 break
             else:
                 sleep(1)
+                reset_snake_position(snake, win)
                 continue
 
         if (y, x) in snake[1:]:
@@ -109,6 +133,7 @@ def main(stdscr):
                 break
             else:
                 sleep(1)
+                reset_snake_position(snake, win)
                 continue
         if (y, x) in obstacles:
             lives -= 1
@@ -116,6 +141,7 @@ def main(stdscr):
                 break
             else:
                 sleep(1)
+                reset_snake_position(snake, win)
                 continue
 
         snake.insert(0, (y, x))
@@ -127,8 +153,10 @@ def main(stdscr):
                 )
                 if food not in snake and food not in obstacles:
                     break
-            win.addch(food[0], food[1], "*",
-                      curses.A_BOLD | curses.color_pair(2))
+            win.addch(
+                 food[0], food[1], "*",
+                 curses.A_BOLD | curses.color_pair(2)
+                 )
         elif snake[0] == food:
             score += 1
             food = ()
@@ -214,7 +242,7 @@ def main(stdscr):
         hard.append_row([name, score])
         top_scorers = hard.get_all_values()[1:]
         sorted_top_scorers = sorted(
-              top_scorers, key=lambda x: int(x[1]), reverse=True)
+             top_scorers, key=lambda x: int(x[1]), reverse=True)
     except Exception as e:
         # Handle any errors that might occur during the API call
         win.addstr(
