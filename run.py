@@ -7,8 +7,14 @@ from snake_easy import main as snake_easy_main
 from snake_medium import main as snake_medium_main
 from snake_hard import main as snake_hard_main
 
-
 class GameMenu:
+    MENU_MAIN = "main"
+    MENU_LEVELS = "levels"
+    MENU_INSTRUCTIONS = "instructions"
+    MENU_LEADERBOARD = "leaderboard"
+    MENU_QUIT = "quit"
+    MENU_GAME_OVER = "game_over"
+
     def __init__(self):
         # Initialize the main menu using TerminalMenu
         self.menu = TerminalMenu(
@@ -27,23 +33,35 @@ class GameMenu:
         self.current_state = None
 
     def show_menu(self):
-        """
-        Show_menu method displays the main menu and
-        stores the chosen menu option's index in current_state
-
-        """
         menu_entry_index = self.menu.show()
-        self.current_state = menu_entry_index
+        self.current_menu = self.MENU_MAIN
+
+        if menu_entry_index == 0:
+            self.current_menu = self.MENU_LEVELS
+        elif menu_entry_index == 1:
+            self.show_instructions()
+        elif menu_entry_index == 2:
+            self.show_leaderboard()
+        elif menu_entry_index == 3:
+            self.current_menu = self.MENU_QUIT
 
     def show_levels_menu(self):
-        """
-        Show_levels_menu method displays a submenu for selecting game
-        levels and updates current_state
-        """
         sub_options = ["Easy", "Medium", "Hard", "Back"]
         sub_menu = TerminalMenu(sub_options, title="LEVELS")
-        sub_menu_entry_index = sub_menu.show()  # Display the submenu
-        self.current_state = sub_menu_entry_index
+        sub_menu_entry_index = sub_menu.show()
+        self.current_menu = self.MENU_LEVELS
+
+        if sub_menu_entry_index == 0:
+            self.start_snake_game(snake_easy_main)
+            self.current_menu = self.MENU_LEVELS
+        elif sub_menu_entry_index == 1:
+            self.start_snake_game(snake_medium_main)
+            self.current_menu = self.MENU_LEVELS
+        elif sub_menu_entry_index == 2:
+            self.start_snake_game(snake_hard_main)
+            self.current_menu = self.MENU_LEVELS
+        elif sub_menu_entry_index == 3:
+            self.current_menu = self.MENU_MAIN
 
     def show_instructions(self):
         """
@@ -102,7 +120,6 @@ class GameMenu:
             if user_input == 0:
                 self.show_menu()
                 break
-
     def choose_leaderboard_level(self):
         """
         choose_leaderboard_level method prompts the user to choose a
@@ -152,120 +169,43 @@ class GameMenu:
             for rank, entry in enumerate(sorted_level_data, start=1):
                 name, score = entry
                 print(f"{rank}. {name}: {score}")
+            back_menu = TerminalMenu(["Back"])
+            user_input = back_menu.show()
+            
+
         except Exception as e:
             print("Error fetching or displaying leaderboard data:", str(e))
 
     def start_game(self):
-        """
-        start_game method contains the main game loop which
-        responds to the user's menu choices and starts the game
-        or displays instructions/leaderboards.
-        """
-        MENU_MAIN = "main"
-        MENU_LEVELS = "levels"
-        MENU_INSTRUCTIONS = "instructions"
-        MENU_LEADERBOARD = "leaderboard"
-        MENU_QUIT = "quit"
-        MENU_GAME_OVER = "game_over"
-
-        current_menu = MENU_MAIN
-
-        while True:
-            if current_menu == MENU_MAIN:
+        while self.current_menu != self.MENU_QUIT:
+            if self.current_menu == self.MENU_MAIN:
                 self.show_menu()
-
-                if self.current_state == 0:
-                    current_menu = MENU_LEVELS
-
-                elif self.current_state == 1:
-                    current_menu = MENU_INSTRUCTIONS
-
-                elif self.current_state == 2:
-                    current_menu = MENU_LEADERBOARD
-
-                elif self.current_state == 3:
-                    current_menu = MENU_QUIT
-
-            elif current_menu == MENU_LEVELS:
+            elif self.current_menu == self.MENU_LEVELS:
                 self.show_levels_menu()
 
-                if self.current_state == 0:
-                    self.start_easy_level()
-
-                elif self.current_state == 1:
-                    self.start_medium_level()
-
-                elif self.current_state == 2:
-                    self.start_hard_level()
-
-                elif self.current_state == 3:
-                    current_menu = MENU_MAIN
-
-            elif current_menu == MENU_INSTRUCTIONS:
+            elif self.current_menu == self.MENU_INSTRUCTIONS:
                 self.show_instructions()
-                current_menu = MENU_MAIN
 
-            elif current_menu == MENU_LEADERBOARD:
-                self.show_leaderboard()
-                current_menu = MENU_MAIN
-
-            elif current_menu == MENU_QUIT:
+            elif self.current_menu == self.MENU_QUIT:
                 print("Thank you for playing! See you soon!")
-                break  # Quit the game
+                break
 
-            elif current_menu == MENU_GAME_OVER:
-                self.show_levels_menu()  # Go back to level selection
-                current_menu = MENU_LEADERBOARD
+            elif self.current_menu == self.MENU_GAME_OVER:
+                self.show_levels_menu()
+                self.current_menu = self.MENU_LEVELS
 
     def start_snake_game(self, game_function):
-        """
-        start_snake_game method is a wrapper that starts the snake game using
-        the provided game function and the curses module
-        """
         curses.wrapper(game_function)
 
-    def start_easy_level(self):
-        """
-        start_easy_level method starts the snake game for the easy level
-        """
-        self.start_snake_game(snake_easy_main)
-        self.current_state = None  # Reset the current state
-        self.show_levels_menu()  # Go back to level selection after the game
-
-    def start_medium_level(self):
-        """
-        start_medium_level method starts the snake game for the medium level
-        """
-        self.start_snake_game(snake_medium_main)
-        self.current_state = None  # Reset the current state
-        self.show_levels_menu()  # Go back to level selection after the game
-
-    def start_hard_level(self):
-        """
-        start_hard_level method starts the snake game for the hard level
-        """
-        self.start_snake_game(snake_hard_main)
-        self.current_state = None  # Reset the current state
-        self.show_levels_menu()
-
     def start(self):
-        """
-        The start method initializes the main menu and begins the game loop.
-        """
-        print("Welcome to Slithering Challenge\n")  # Heading
+        print("Welcome to Slithering Challenge\n")
         self.show_menu()
         self.start_game()
 
-
 def main():
-    """
-    The main function creates an instance of GameMenu and starts the game menu.
-    """
-    os.system('cls' if os.name == 'nt' else 'clear')  # Clear the terminal
-
+    os.system('cls' if os.name == 'nt' else 'clear')
     game_menu = GameMenu()
     game_menu.start()
-
 
 if __name__ == "__main__":
     main()
