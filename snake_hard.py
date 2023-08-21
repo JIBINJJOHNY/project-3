@@ -195,8 +195,8 @@ def main(stdscr):
         sh // 2 - 2, sw // 2 - 15,
         "Do you want to save your score?", curses.A_BOLD
     )
-    win.addstr(sh // 2, sw // 2 - 6, "Yes", curses.A_BOLD)
-    win.addstr(sh // 2, sw // 2 + 1, "No", curses.A_BOLD)
+    win.addstr(sh // 2, sw // 2 - 15, "click (y) for Yes", curses.A_BOLD)
+    win.addstr(sh // 2, sw // 2 + 10, "click (n) for No", curses.A_BOLD)
     win.refresh()
     # Get user input for saving score
     save_choice = None

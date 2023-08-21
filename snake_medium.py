@@ -9,8 +9,9 @@ from google.oauth2.service_account import Credentials
 
 def main(stdscr):
     """
-    main function that controls the game.
-    It receives a stdscr object which represents the game screen.
+     main function It sets up the terminal window,
+    initializes the game variables such as
+    the snake's position, food position, score, and lives
     """
 
     stdscr.clear()
@@ -142,6 +143,7 @@ def main(stdscr):
         win.addch(snake[0][0], snake[0][1], "#",
                   curses.A_BOLD | curses.color_pair(1))
 
+    # Clear the window before displaying the game over message
     win.clear()
     win.addstr(sh // 2 - 1, sw // 2 - 10, "Game Over", curses.A_BOLD)
     win.addstr(sh // 2, sw // 2 - 10, f"Final Score: {score}", curses.A_BOLD)
@@ -159,15 +161,16 @@ def main(stdscr):
     # Display the save score prompt and options
     win.addstr(
         sh // 2 - 2, sw // 2 - 15,
-        "Do you want to save your score?", curses.A_BOLD
-    )
-    win.addstr(sh // 2, sw // 2 - 6, "Yes", curses.A_BOLD)
-    win.addstr(sh // 2, sw // 2 + 1, "No", curses.A_BOLD)
+        "Do you want to save your score?", curses.A_BOLD)
+    win.addstr(sh // 2, sw // 2 - 15, "click (y) for Yes", curses.A_BOLD)
+    win.addstr(sh // 2, sw // 2 + 10, "click (n) for No", curses.A_BOLD)
     win.refresh()
+
     # Get user input for saving score
     save_choice = None
     while save_choice not in [ord("y"), ord("n")]:
         save_choice = win.getch()
+
     # If user chose to save the score, you can add your saving logic here
     SCOPE = [
         "https://www.googleapis.com/auth/spreadsheets",
@@ -194,7 +197,6 @@ def main(stdscr):
                 win.addstr(name_row, name_col, name, curses.A_NORMAL)
         # Refresh the screen once after the name has been entered
         win.refresh()
-        # Save the score and name to Google Sheets
         # Assign the name to current_user_name
         current_user_name = name
     # Clear the window again before displaying the top scorers list
@@ -206,9 +208,9 @@ def main(stdscr):
         SHEET = GSPREAD_CLIENT.open("slithering_challenge")
         medium = SHEET.worksheet("medium")
         medium.append_row([name, score])
-        top_scorers = hard.get_all_values()[1:]
+        top_scorers = medium.get_all_values()[1:]
         sorted_top_scorers = sorted(
-             top_scorers, key=lambda x: int(x[1]), reverse=True)
+            top_scorers, key=lambda x: int(x[1]), reverse=True)
     except Exception as e:
         # Handle any errors that might occur during the API call
         win.addstr(
@@ -216,8 +218,8 @@ def main(stdscr):
             "Error fetching top scorers.", curses.A_BOLD)
         win.addstr(sh // 2 + 1, sw // 2 - 15, str(e))
         win.refresh()
-    # Display the top 10 scorers list
 
+    # Display the top 10 scorers list
     try:
         win.clear()  # Clear the window before displaying the top scorers list
         win.addstr(sh // 2 - 5, sw // 2 - 15, "Top 10 Scorers", curses.A_BOLD)
@@ -250,8 +252,11 @@ def main(stdscr):
         win.clear()
         win.addstr(
             sh // 2, sw // 2 - 15,
-            "Error fetching top scorers.", curses.A_BOLD)
+            "Error fetching top scorers.",
+            curses.A_BOLD
+            )
         win.addstr(sh // 2 + 1, sw // 2 - 15, str(e))
+        win.refresh()
 
 
 if __name__ == "__main__":

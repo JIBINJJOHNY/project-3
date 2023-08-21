@@ -13,7 +13,8 @@ def main(stdscr):
     the snake's position, food position, score, and lives
     """
     stdscr.clear()
-    init(autoreset=True)
+
+    init(autoreset=True)  # Initializes the colorama library.
     curses.start_color()  # Initialize color pairs in curses
     curses.init_pair(1, curses.COLOR_YELLOW, curses.COLOR_BLACK)  # Snake color
     curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)  # Food color
@@ -25,11 +26,13 @@ def main(stdscr):
     win.border(0)
     win.nodelay(1)
 
+    # This initializes the snake list with the initial positions of the snake.
     snake = [
         (sh // 2, sw // 2),
         (sh // 2, sw // 2 - 1),
         (sh // 2, sw // 2 - 2)
         ]
+    # Initializes an empty tuple food to store the position of the food.
     food = ()
     ESC = 27
     key = curses.KEY_RIGHT
@@ -37,7 +40,7 @@ def main(stdscr):
 
     score = 0
     lives = 3
-    
+
     def reset_snake_position(snake, win):
         """
         Clear the previous snake body cells and reset
@@ -146,8 +149,8 @@ def main(stdscr):
         sh // 2 - 2, sw // 2 - 15,
         "Do you want to save your score?", curses.A_BOLD
     )
-    win.addstr(sh // 2, sw // 2 - 6, "Yes", curses.A_BOLD)
-    win.addstr(sh // 2, sw // 2 + 1, "No", curses.A_BOLD)
+    win.addstr(sh // 2, sw // 2 - 15, "click (y) for Yes", curses.A_BOLD)
+    win.addstr(sh // 2, sw // 2 + 10, "click (n) for No", curses.A_BOLD)
     win.refresh()
     # Get user input for saving score
     save_choice = None
