@@ -46,7 +46,6 @@ def main(stdscr):
     win = curses.newwin(sh + 1, sw + 1, 0, 0)
     win.keypad(1)
     curses.noecho()
-    curses.curs_set(0)
     win.border(0)
     win.nodelay(1)
 
