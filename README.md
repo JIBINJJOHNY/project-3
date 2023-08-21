@@ -247,8 +247,8 @@ Please refer to the [TESTING.md](TESTING.md) file for all test related documenta
       - ![Reveal Config Vars](./documents/config_vars.png)
 
   1. Add 1 new Config Vars:
-      - Key: PORT Value: 8000
-      - *This Config was provided by [CODE INSTITUTE](https://codeinstitute.net/)*.
+      - Key: CREDS
+      - Value:I copied from creds.json file and  add it config vars
 
   1. Go back to the Deploy tab:
 
