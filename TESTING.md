@@ -75,7 +75,9 @@ No errors were found:
             sh // 2 - 5 + i + 1, sw // 2 - 15, position_str, curses.A_STANDOUT
         )
   ```
-
+1. Sometimes, when the snake hits itself on an easy level, it will restart from the same position and display the game over the message and total score.
+ - *Solutions:* It works in local system 
+ [Click here to watch the video](./documents/easylevel.mp4)
 + **Unsolved bugs**
 - I try to adds a mechanism to periodically generate new obstacles in the game but it was not worked.
 ```python
